@@ -1,4 +1,4 @@
-# Pyntman
+# Pynt
 
 # Description:
 bla bla bla
