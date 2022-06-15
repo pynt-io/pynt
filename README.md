@@ -15,7 +15,7 @@ Download Pynt docker:
 
 `docker pull ghcr-io/overcast-security/pynt:latest`
   
-Run docker linux
+Run docker
 
 `docker run -v <full path folder>:/etc/pynt/ --network="host" ghcr.io/overcast-security/pynt:latest`
 
