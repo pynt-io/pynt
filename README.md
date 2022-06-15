@@ -1,6 +1,6 @@
 # Pynt
 
-# Description:
+## Description:
 Pynt is an API Security testing solution built on top of Newman - a postman collection runner.
 
 Do you test your cloud app with Newman ? now you can easily test for common API Security issues with the Pynt docker.
@@ -9,7 +9,7 @@ You can use Pynt docker in the same way you use Newman, with Pynt you get the bo
 
 
 
-# Getting started:
+## Getting started:
 
 Download Pynt docker:
 
@@ -19,10 +19,10 @@ Run docker linux
 
 `docker run -v <full path folder>:/etc/pynt/ --network="host" ghcr.io/overcast-security/pynt:latest`
 
-# Command line options
+## Command line options
 `-c <postman collection file>`
 
 `-e <environment variable file>` 
 
-# EULA:
+## EULA:
 Beta version - use this for educational purposes only
