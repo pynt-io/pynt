@@ -17,11 +17,12 @@ Download Pynt docker:
   
 Run docker linux
 
-`docker run -v <full path folder>:/etc/pynt/ --network="host" ghcr.io/overcast-security/pynt:latest -c <collection name>`
-
+`docker run -v <full path folder>:/etc/pynt/ --network="host" ghcr.io/overcast-security/pynt:latest`
 
 # Command line options
-`-e <environment_file>` 
+`-c <postman collection file>`
+
+`-e <environment variable file>` 
 
 # EULA:
 Beta version - use this for educational purposes only
