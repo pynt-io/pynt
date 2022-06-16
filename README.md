@@ -24,7 +24,7 @@ Run docker:
 docker run -v <full path folder>:/etc/pynt/ --rm --network="host" ghcr.io/overcast-security/pynt:latest -c <postman collection file> -e <postman environment file>
 ```
 
-## Command line options
+## Command line options:
 
 Postman collection file - required:
 ```
@@ -36,7 +36,7 @@ Postman environment file - optional:
 -e <postman environment file>
 ```
 
-## Example
+## Example:
 
 To test your:
 - `my_collection.postman_collection.json` Postman collection file
