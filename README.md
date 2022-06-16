@@ -18,7 +18,7 @@ Download Pynt docker:
 docker pull ghcr.io/overcast-security/pynt:latest
 ```
   
-Run docker
+Run docker:
 
 ```
 docker run -v <full path folder>:/etc/pynt/ --rm --network="host" ghcr.io/overcast-security/pynt:latest -c <postman collection file> -e <postman environment file>
