@@ -12,7 +12,7 @@ You can use Pynt docker in the same way you use Newman, with Pynt you get both t
 
 ## Getting started:
 
-Download Pynt docker:
+Download Pynt docker (Make sure Docker is running):
 
 ```
 docker pull ghcr.io/overcast-security/pynt:latest
