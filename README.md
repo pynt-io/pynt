@@ -7,7 +7,8 @@ Do you test your cloud app with Newman ? now you can easily test for common API 
 
 You can use Pynt docker in the same way you use Newman, with Pynt you get both the functional and the security tests results.
 
-
+## Requirements:
+- Docker (you can install from https://www.docker.com/products/docker-desktop/)
 
 ## Getting started:
 
@@ -46,5 +47,6 @@ You can use the following command line:
 ```
 docker run -v /Users/admin/AmazingProject/api_tests:/etc/pynt/ --rm --network="host"  ghcr.io/overcast-security/pynt:latest -c my_collection.postman_collection.json -e my_environment.postman_environment.json
 ```
+
 ## EULA:
 Beta version - use this for educational purposes only
