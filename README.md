@@ -15,7 +15,7 @@ You can use Pynt docker in the same way you use Newman, with Pynt you get both t
 Download Pynt docker (make sure Docker is running):
 
 ```
-docker pull ghcr.io/overcast-security/pynt:latest
+docker pull ghcr.io/pynt-io/pynt:latest
 ```
   
 Run docker:
