@@ -21,7 +21,7 @@ docker pull ghcr.io/overcast-security/pynt:latest
 Run docker:
 
 ```
-docker run -v <full path folder>:/etc/pynt/ --rm --network="host" ghcr.io/overcast-security/pynt:latest -c <postman collection file> -e <postman environment file>
+docker run -v <full path folder>:/etc/pynt/ --rm --network="host" ghcr.io/pynt-io/pynt:latest -c <postman collection file> -e <postman environment file>
 ```
 
 ## Command line options:
@@ -45,7 +45,7 @@ To test your:
 
 You can use the following command line:
 ```
-docker run -v /Users/admin/AmazingProject/api_tests:/etc/pynt/ --rm --network="host"  ghcr.io/overcast-security/pynt:latest -c my_collection.postman_collection.json -e my_environment.postman_environment.json
+docker run -v /Users/admin/AmazingProject/api_tests:/etc/pynt/ --rm --network="host"  ghcr.io/pynt-io/pynt:latest -c my_collection.postman_collection.json -e my_environment.postman_environment.json
 ```
 
 ## EULA:
