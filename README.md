@@ -7,7 +7,7 @@ Do you test your cloud app with Newman? now you can easily test for common API S
 
 You can use Pynt docker in the same way you use Newman, with Pynt you get both the functional and the security tests results.
 
-## Requirements:
+## Prerequisites:
 - Docker (you can install from https://www.docker.com/products/docker-desktop/)
 
 ## Getting started:
