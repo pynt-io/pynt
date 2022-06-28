@@ -5,7 +5,7 @@ Pynt is an API Security testing solution built on top of Newman - a postman coll
 
 Do you test your cloud app with Newman? now you can easily test for common API Security issues with the Pynt docker.
 
-You can use Pynt docker in the same way you use Newman, with Pynt you get both the functional and the security tests results.
+You can use Pynt docker in the same way you use Newman, with Pynt you get both the functional and the security test results.
 
 ## Prerequisites:
 - Docker (you can install from https://www.docker.com/products/docker-desktop/)
