@@ -48,5 +48,5 @@ You can use the following command line:
 docker run -v /Users/admin/AmazingProject/api_tests:/etc/pynt/ --rm --network="host"  ghcr.io/pynt-io/pynt:latest -c my_collection.postman_collection.json -e my_environment.postman_environment.json
 ```
 
-## EULA:
-Beta version - use this for educational purposes only
+## Need Support?
+If you have questions or need any help, please email us at support@pynt.io.
