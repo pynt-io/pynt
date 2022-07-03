@@ -36,6 +36,10 @@ Postman environment file - optional:
 -e <postman environment file>
 ```
 
+## EULA and Privacy Policy
+
+Please read the [EULA](https://github.com/pynt-io/pynt/blob/main/EULA.md) and the [privacy policy](https://github.com/pynt-io/pynt/blob/main/Privacy-Policy.md) carefully before downloading or using Pynt.
+
 ## Example:
 
 To test your:
