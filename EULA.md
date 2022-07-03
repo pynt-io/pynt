@@ -3,8 +3,7 @@ End-User License Agreement ("Agreement")
 
 Last updated: June 28, 2022
 
-Please read this End-User License Agreement carefully before clicking the "I
-Agree" button, downloading or using Pynt.
+Please read this End-User License Agreement carefully before downloading or using Pynt.
 
 Interpretation and Definitions  
 ==============================
