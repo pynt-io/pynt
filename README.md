@@ -13,7 +13,7 @@ You should be able also to integrate Pynt into your CI/CD pipeline seamlessly - 
 
 ## Prerequisites:
 
-- Docker (you can install from https://www.docker.com/products/docker-desktop/)
+- Docker is available on your machine (you can install from https://www.docker.com/products/docker-desktop/)
 - Functional test collection is available
 - Target is up
 
