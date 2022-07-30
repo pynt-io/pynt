@@ -16,6 +16,10 @@ You should be able also to integrate Pynt into your CI/CD pipeline seamlessly - 
 - Docker is available on your machine (you can install from https://www.docker.com/products/docker-desktop/)
 - Functional test collection is available
 - Target is up
+Please verify all the above by running your test colletiion before running the security test
+
+* IMPORTANT NOTE: The security automated test quality depands on your functional test conllection, e.g. more APIs, more users, more requests
+will trigger an improved security tests - its a win-win!
 
 ## Getting started:
 
