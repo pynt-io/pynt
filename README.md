@@ -17,7 +17,7 @@ You should be able also to integrate Pynt into your CI/CD pipeline seamlessly - 
 - Functional test collection is available
 - Target is up
 - IMPORTANT NOTE 1: Please verify all the above by running your test collection before executing the Pynt security test
-- IMPORTANT NOTE 2: The quality of Pynt automated security test depands on the quality of your functional test collection: more APIs, more users, more requests and full use of the parameters will trigger an improved security tests - its a win-win!
+- IMPORTANT NOTE 2: The quality of Pynt automated security test depands on the quality of your functional test collection: more APIs, more users, more requests and full use of the parameters will trigger improved security tests - it's a win-win!
 
 ## Getting started:
 
