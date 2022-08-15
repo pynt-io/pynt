@@ -48,7 +48,7 @@ For example, more APIs, more users, more requests and full use of the parameters
 ![image](https://user-images.githubusercontent.com/107360829/184634172-aee40f66-2227-4fa2-8304-374ab1362257.png)
 3. Run the new security collection to get the security results!
 ![image](https://user-images.githubusercontent.com/107360829/184634843-f9a4e7be-67d7-46fc-bbd8-46ab5e6e0338.png)
-4. In case you modified your functional test collection or you wish to refer to another test collection, go back to step 1b.
+4. In case you modified your functional test collection or you wish to refer to another test collection, go back to step 1.
 
 ## EULA and Privacy Policy
 
