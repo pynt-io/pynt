@@ -28,7 +28,7 @@ For example, more APIs, more users, more requests and full use of the parameters
 
 ## Getting started:
 
-- Download <a href=https://raw.githubusercontent.com/pynt-io/pynt/main/postman-integration/Pynt%20For%20Windows.postman_collection.json>'Pynt for Windows' collection</a>
+- Download <a id='raw-url' href=https://raw.githubusercontent.com/pynt-io/pynt/main/postman-integration/Pynt%20For%20Windows.postman_collection.json>'Pynt for Windows' collection</a>
 - Import the collection into your Workspace in Postman app
 - Follow the steps described below (You can also view the run instractions in Postman as part of the 'Pynt for Windows'collection documentation).
 
