@@ -28,7 +28,8 @@ For example, more APIs, more users, more requests and full use of the parameters
 
 ## Getting started:
 
-- Download ```html
+- Download 
+```html
 <a id='raw-url' href="https://raw.githubusercontent.com/pynt-io/pynt/main/postman-integration/Pynt%20For%20Windows.postman_collection.json" download="Pynt%20For%20Windows.postman_collection.json">'Pynt for Windows' collection</a>
 ``` 
 - Import the collection into your Workspace in Postman app
