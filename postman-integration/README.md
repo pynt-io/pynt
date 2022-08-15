@@ -31,8 +31,8 @@ For example, more APIs, more users, more requests and full use of the parameters
 
 - Download by right click->'save link as'
 <a id='raw-url' href="https://raw.githubusercontent.com/pynt-io/pynt/main/postman-integration/Pynt%20For%20Windows.postman_collection.json" download="Pynt%20For%20Windows.postman_collection.json" Download="https://raw.githubusercontent.com/pynt-io/pynt/main/postman-integration/Pynt%20For%20Windows.postman_collection.json" download="Pynt%20For%20Windows.postman_collection.json">'Pynt for Windows' collection</a>
-
 - Import the collection into your Workspace in Postman app
+![image](https://user-images.githubusercontent.com/107360829/184631735-f45d7257-a082-4b21-a356-44ac223ececd.png)
 - Follow the steps described below (You can also view the run instractions in Postman as part of the 'Pynt for Windows'collection documentation).
 
 ## How to Run:
@@ -44,7 +44,6 @@ For example, more APIs, more users, more requests and full use of the parameters
 2. Run the 'Pynt for Windows' collection. A new forked collection of your chosen collection will be created with the label of API-Security.
 3. Run the new security collection to get the security results!
 4. In case you modified your functional test collection or you wish to refer to another test collection, go back to step 1b.
-
 
 ## EULA and Privacy Policy
 
