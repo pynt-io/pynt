@@ -45,7 +45,9 @@ For example, more APIs, more users, more requests and full use of the parameters
 - port - Pynt will use this port. Change to other than 5001 if this port already in use.
 ![image](https://user-images.githubusercontent.com/107360829/184633914-25b282b1-01d2-491a-8381-8afa492e01fb.png)
 2. Run the 'Pynt for Windows' collection. A new forked collection of your chosen collection will be created with the label of API-Security.
+![image](https://user-images.githubusercontent.com/107360829/184634172-aee40f66-2227-4fa2-8304-374ab1362257.png)
 3. Run the new security collection to get the security results!
+![image](https://user-images.githubusercontent.com/107360829/184634843-f9a4e7be-67d7-46fc-bbd8-46ab5e6e0338.png)
 4. In case you modified your functional test collection or you wish to refer to another test collection, go back to step 1b.
 
 ## EULA and Privacy Policy
