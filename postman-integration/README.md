@@ -3,12 +3,11 @@
 ## Description:
 
 Pynt is an API security solution which generates automated security tests based on your existing functional test collection.
-
 Pynt dynamic security test covers the OWASP-10 top API categories and retrieves the results in few minutes.
 
 
 ## Prerequisites:
-
+This integration support Windows only.
 1. Ensure you are working with Postman app (install from https://www.postman.com/downloads). 
 Note that Pynt solution is based on docker, so it doesn't work with Postman for web, only with the desktop app.
 2. Ensure Docker desktop is available and running on your machine (install Docker from
