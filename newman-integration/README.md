@@ -13,11 +13,18 @@ You should be able also to integrate Pynt into your CI/CD pipeline seamlessly - 
 
 ## Prerequisites:
 
-- Docker is available on your machine (you can install from https://www.docker.com/products/docker-desktop/)
-- Functional test collection is available
-- Target is up
-- IMPORTANT NOTE 1: Please verify all the above by running your test collection before executing the Pynt security test
-- IMPORTANT NOTE 2: The quality of Pynt automated security test depands on the quality of your functional test collection: more APIs, more users, more requests and full use of the parameters will trigger improved security tests - it's a win-win!
+1. Ensure Docker desktop is available and running on your machine (install Docker from
+https://www.docker.com/products/docker-desktop/).
+2. Ensure your functional test collection is available in your workspace.
+3. If your functional tests requires environment variables, make sure they are set.
+4. Make sure your target is up.
+
+## Important Notes:
+
+- Please verify the above by running your functional test collection vs. your target before executing the Pynt security test.
+- Pynt utilizes your functional tests to inform the security tests. \
+The more extensive the functional tests are, the more the security tests will cover. 
+For example, more APIs, more users, more requests and full use of the parameters will trigger broader and richer dynamic security tests.
 
 ## Getting started:
 
