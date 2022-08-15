@@ -28,11 +28,12 @@ For example, more APIs, more users, more requests and full use of the parameters
 
 ## Getting started:
 
-- Download Pynt collection from https://github.com/pynt-io/pynt/blob/main/postman-integration/Pynt%20For%20Windows.postman_collection.json
-- Import Pynt collection to your Workspace in Postman app
+- Download ['Pynt for Windows' collection](https://github.com/pynt-io/pynt/blob/main/postman-integration/Pynt%20For%20Windows.postman_collection.json)
+- Import the collection into your Workspace in Postman app
+- Follow the steps described below (You can also view the run instractions in Postman as part of the 'Pynt for Windows'collection documentation).
 
 ## How to Run:
-
+ 
 1. Click on the 'Variables' tab of the 'Pynt for Windows' collection and fill the values of required parameters:
 - API-KEY - your postman API key - If you previously saved and have your API key, enter it here under the 'Current Value' tab. If not, enter       https://postman.co/settings/me/api-keys to generate or regenarete your API key as it can be copied only when created for security reasons. You won't need to modify     this parameter till your API-key will expire.
 - COLLECTION-NAME - your functional test collection name, e.g. 'Test Collection 1'. Pynt will refer to this collection to generate the automated security tests.
