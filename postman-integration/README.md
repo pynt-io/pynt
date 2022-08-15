@@ -9,14 +9,14 @@ Pynt dynamic security test covers the OWASP-10 top API categories and retrieves 
 
 ## Prerequisites:
 
-- Ensure you are working with Postman app (install from https://www.postman.com/downloads). 
+1. Ensure you are working with Postman app (install from https://www.postman.com/downloads). 
 Note that Pynt solution is based on docker, so it doesn't work with Postman for web, only with the desktop app.
-- Ensure Docker desktop is available and running on your machine (install Docker from
+2. Ensure Docker desktop is available and running on your machine (install Docker from
 https://www.docker.com/products/docker-desktop/).
-- Enable The 'Expose daemon on tcp://localhost:2375 without TLS' option in the General section of your Docker desktop settings.
-- Ensure your functional test collection is available in your workspace.
-- If your functional tests requires environment variables, make sure they are set.
-- Make sure your target is up.
+3. Enable The 'Expose daemon on tcp://localhost:2375 without TLS' option in the General section of your Docker desktop settings.
+4. Ensure your functional test collection is available in your workspace.
+5. If your functional tests requires environment variables, make sure they are set.
+6. Make sure your target is up.
 
 
 ## Important Notes:
@@ -33,13 +33,13 @@ For example, more APIs, more users, more requests and full use of the parameters
 
 ## How to Run:
 
-- Click on the 'Variables' tab of the 'Pynt for Windows' collection and fill the values of required parameters:
-API-KEY - your postman API key - If you previously saved and have your API key, enter it here under the 'Current Value' tab. If not, enter https://postman.co/settings/me/api-keys to generate or regenarete your API key as it can be copied only when created for security reasons. You won't need to modify this parameter till your API-key will expire.
-COLLECTION-NAME - your functional test collection name, e.g. 'Test Collection 1'. Pynt will refer to this collection to generate the automated security tests.
-port - Pynt will use this port. Change to other than 5001 if this port already in use.
-- Run the 'Pynt for Windows' collection. A new forked collection of your chosen collection will be created with the label of API-Security.
-- Run the new security collection to get the security results!
-- In case you modified your functional test collection or you wish to refer to another test collection, go back to step 1b.
+1. Click on the 'Variables' tab of the 'Pynt for Windows' collection and fill the values of required parameters:
+- API-KEY - your postman API key - If you previously saved and have your API key, enter it here under the 'Current Value' tab. If not, enter       https://postman.co/settings/me/api-keys to generate or regenarete your API key as it can be copied only when created for security reasons. You won't need to modify     this parameter till your API-key will expire.
+- COLLECTION-NAME - your functional test collection name, e.g. 'Test Collection 1'. Pynt will refer to this collection to generate the automated security tests.
+- port - Pynt will use this port. Change to other than 5001 if this port already in use.
+2. Run the 'Pynt for Windows' collection. A new forked collection of your chosen collection will be created with the label of API-Security.
+3. Run the new security collection to get the security results!
+4. In case you modified your functional test collection or you wish to refer to another test collection, go back to step 1b.
 
 
 ## EULA and Privacy Policy
