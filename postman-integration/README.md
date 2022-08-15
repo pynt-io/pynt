@@ -14,6 +14,7 @@ Note that Pynt solution is based on docker, so it doesn't work with Postman for 
 2. Ensure Docker desktop is available and running on your machine (install Docker from
 https://www.docker.com/products/docker-desktop/).
 3. Enable The 'Expose daemon on tcp://localhost:2375 without TLS' option in the General section of your Docker desktop settings.
+![image](https://user-images.githubusercontent.com/107360829/184631176-f68bffaa-5f78-4f30-8368-8694acba6862.png)
 4. Ensure your functional test collection is available in your workspace.
 5. If your functional tests requires environment variables, make sure they are set.
 6. Make sure your target is up.
