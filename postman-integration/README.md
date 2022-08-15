@@ -34,7 +34,7 @@ For example, more APIs, more users, more requests and full use of the parameters
 - Import the collection into your Workspace in Postman app
 ![image](https://user-images.githubusercontent.com/107360829/184631735-f45d7257-a082-4b21-a356-44ac223ececd.png)
 - Follow the steps described below (You can also view the run instractions in Postman as part of the 'Pynt for Windows' collection documentation).
-![image](https://user-images.githubusercontent.com/107360829/184632150-f6520098-d808-4591-83a5-bbb09ccb38f0.png)
+![image](https://user-images.githubusercontent.com/107360829/184632325-5d05dbed-cfa8-475e-9f91-7999e381c5fa.png)
 
 ## How to Run:
  
