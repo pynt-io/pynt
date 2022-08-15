@@ -43,7 +43,7 @@ For example, more APIs, more users, more requests and full use of the parameters
 ![image](https://user-images.githubusercontent.com/107360829/184632643-ba29d4d6-b4f6-4d8b-a025-bf42b5662639.png)
 - COLLECTION-NAME - your functional test collection name, e.g. 'Test Collection 1'. Pynt will refer to this collection to generate the automated security tests.
 - port - Pynt will use this port. Change to other than 5001 if this port already in use.
-![image](https://user-images.githubusercontent.com/107360829/184633628-cc6408f5-4a6a-4cdb-90a9-74fef66a8b4a.png)
+![image](https://user-images.githubusercontent.com/107360829/184633914-25b282b1-01d2-491a-8381-8afa492e01fb.png)
 2. Run the 'Pynt for Windows' collection. A new forked collection of your chosen collection will be created with the label of API-Security.
 3. Run the new security collection to get the security results!
 4. In case you modified your functional test collection or you wish to refer to another test collection, go back to step 1b.
