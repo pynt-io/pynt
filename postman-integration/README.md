@@ -7,6 +7,7 @@ Pynt dynamic security test covers the OWASP-10 top API categories and retrieves 
 
 
 ## Prerequisites:
+
 This integration support Windows only.
 1. Ensure you are working with Postman app (install from https://www.postman.com/downloads). 
 Note that Pynt solution is based on docker, so it doesn't work with Postman for web, only with the desktop app.
@@ -35,7 +36,8 @@ For example, more APIs, more users, more requests and full use of the parameters
 
 ## How to Run:
  
-1. Click on the 'Variables' tab of the 'Pynt' collection and fill the values of required parameters:
+1. Download and run Pynt by executing the following command via cmd:docker run -p 5001:5001 -d --pull always --network=host ghcr.io/pynt-io/pynt:postman-latest
+2. Click on the 'Variables' tab of the 'Pynt' collection and fill the values of required parameters:
 - API-KEY - your postman API key - If you previously saved and have your API key, enter it here under the 'Current Value' tab. If not, enter       https://postman.co/settings/me/api-keys to generate or regenarete your API key as it can be copied only when created for security reasons. You won't need to modify     this parameter till your API-key will expire.
 ![image](https://user-images.githubusercontent.com/107360829/184632643-ba29d4d6-b4f6-4d8b-a025-bf42b5662639.png)
 - COLLECTION-NAME - your functional test collection name, e.g. 'Test Collection 1'. Pynt will refer to this collection to generate the automated security tests.
