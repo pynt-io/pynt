@@ -57,8 +57,8 @@ docker run -d --pull always --network=host ghcr.io/pynt-io/pynt:postman-latest
 2. Run the 'Pynt' collection. A new forked collection of your chosen collection will be created with the label of API-Security.
 ![image](https://user-images.githubusercontent.com/107360829/185963531-1751f616-0cc9-427a-9df5-b413cf5f343f.png)
 3. Run the new security collection to get the security results!
-![image](https://user-images.githubusercontent.com/107360829/184634843-f9a4e7be-67d7-46fc-bbd8-46ab5e6e0338.png)
-4. In case you modified your functional test collection or you wish to refer to another test collection, go back to step 1.
+![image](https://user-images.githubusercontent.com/107360829/185970397-c93a32b1-99b2-4d88-8361-e6654de0fa61.png)
+4. In case you modified your functional test collection or you wish to refer to another test collection, go back to step 2.
 
 ## EULA and Privacy Policy
 
