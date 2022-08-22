@@ -28,9 +28,9 @@ For example, more APIs, more users, more requests and full use of the parameters
 
 Download Pynt collection:
 1. Enter https://www.postman.com/pynt-io/workspace/pynt
-2. Right click on 'Pynt' collection to create a Fork into your Workspace in Postman app.
+2. Create a fork from 'Pynt' collection to your Workspace in Postman app.
 ![image](https://user-images.githubusercontent.com/107360829/185942430-3a06263b-6ddc-4748-89e6-01444d3fa7fb.png)
-
+3. To run Pynt from your workspace, continue from the instructions in Pyn't collection description (also available below).
 
 ## How to Run:
  
