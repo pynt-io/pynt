@@ -27,7 +27,7 @@ For example, more APIs, more users, more requests and full use of the parameters
 ## Getting started:
 
 Download Pynt collection:
-1. Enter https://www.postman.com/pynt-io/workspace/pynt/overview
+1. Enter https://www.postman.com/pynt-io/workspace/pynt
 2. Right click on 'Pynt' collection to create a Fork into your Workspace in Postman app.
 ![image](https://user-images.githubusercontent.com/107360829/185942430-3a06263b-6ddc-4748-89e6-01444d3fa7fb.png)
 
