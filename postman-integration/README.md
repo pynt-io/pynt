@@ -36,11 +36,11 @@ Download Pynt collection:
  
 1. Download and run Pynt docker by executing the following command via cmd (port nunber can be changed if already taken).
 
-Windows:
+Windows cmd or Mac terminal:
 ```
 docker run -p 5001:5001 -d --pull always ghcr.io/pynt-io/pynt:postman-latest
 ```
-Linux:
+Linux terminal:
 ```
 docker run -p 5001:5001 -d --pull always --network=host ghcr.io/pynt-io/pynt:postman-latest
 ```
