@@ -54,7 +54,7 @@ docker run -d --pull always --network=host ghcr.io/pynt-io/pynt:postman-latest
 - COLLECTION-NAME - your functional test collection name, e.g. 'Test Collection 1'. Pynt will refer to this collection to generate the automated security tests.
 ![image](https://user-images.githubusercontent.com/107360829/185961165-76d9a2a2-e695-4d72-ac80-f98b41bad7ce.png)
 2. Run the 'Pynt' collection. A new forked collection of your chosen collection will be created with the label of API-Security.
-![image](https://user-images.githubusercontent.com/107360829/184634172-aee40f66-2227-4fa2-8304-374ab1362257.png)
+![image](https://user-images.githubusercontent.com/107360829/185963531-1751f616-0cc9-427a-9df5-b413cf5f343f.png)
 3. Run the new security collection to get the security results!
 ![image](https://user-images.githubusercontent.com/107360829/184634843-f9a4e7be-67d7-46fc-bbd8-46ab5e6e0338.png)
 4. In case you modified your functional test collection or you wish to refer to another test collection, go back to step 1.
