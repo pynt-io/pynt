@@ -34,7 +34,7 @@ Download Pynt collection:
 
 ## How to Run:
  
-1. Download and run Pynt docker by executing the following command via cmd.
+1. Download and run Pynt docker by executing the following command via cmd (port nunber can be changed if already taken).
 
 Windows:
 ```
