@@ -26,17 +26,24 @@ For example, more APIs, more users, more requests and full use of the parameters
 
 ## Getting started:
 
-- Download by right click->'save link as'
-<a id='raw-url' href="https://raw.githubusercontent.com/pynt-io/pynt/main/postman-integration/Pynt.postman_collection.json" download="Pynt.postman_collection.json" Download="https://raw.githubusercontent.com/pynt-io/pynt/main/postman-integration/Pynt.postman_collection.json" download="Pynt.postman_collection.json">'Pynt' collection</a>
-- Import the collection into your Workspace in Postman app
-![image](https://user-images.githubusercontent.com/107360829/185918980-88ca9289-f21e-40a6-95de-0c07be14da09.png)
+Download Pynt collection:
+1. Enter https://www.postman.com/pynt-io/workspace/pynt/overview
+2. Right click on 'Pynt' collection to create a Fork into your Workspace in Postman app.
+![image](https://user-images.githubusercontent.com/107360829/185942430-3a06263b-6ddc-4748-89e6-01444d3fa7fb.png)
+
 
 ## How to Run:
  
-1. Download and run Pynt by executing the following command via cmd:
+1. Download and run Pynt docker by executing the following command via cmd:
+Windows:
+```
+docker run -p 5001:5001 -d --pull always ghcr.io/pynt-io/pynt:postman-latest
+```
+Linux:
 ```
 docker run -p 5001:5001 -d --pull always --network=host ghcr.io/pynt-io/pynt:postman-latest
 ```
+
 2. Click on the 'Variables' tab of the 'Pynt' collection and fill the values of required parameters:
 - API-KEY - your postman API key - If you previously saved and have your API key, enter it here under the 'Current Value' tab. If not, enter       https://postman.co/settings/me/api-keys to generate or regenarete your API key as it can be copied only when created for security reasons. You won't need to modify     this parameter till your API-key will expire.
 ![image](https://user-images.githubusercontent.com/107360829/184632643-ba29d4d6-b4f6-4d8b-a025-bf42b5662639.png)
