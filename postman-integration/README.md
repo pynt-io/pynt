@@ -49,7 +49,7 @@ docker run -p 5001:5001 -d --pull always --network=host ghcr.io/pynt-io/pynt:pos
 - API-KEY - your postman API key - If you previously saved and have your API key, enter it here under the 'Current Value' tab. If not, enter       https://postman.co/settings/me/api-keys to generate or regenarete your API key as it can be copied only when created for security reasons. You won't need to modify     this parameter till your API-key will expire.
 ![image](https://user-images.githubusercontent.com/107360829/184632643-ba29d4d6-b4f6-4d8b-a025-bf42b5662639.png)
 - COLLECTION-NAME - your functional test collection name, e.g. 'Test Collection 1'. Pynt will refer to this collection to generate the automated security tests.
-- port - Pynt will use this port. Change to other than 5001 if this port already in use.
+- port - the port used to run Pynt docker (default-5001).
 ![image](https://user-images.githubusercontent.com/107360829/184633914-25b282b1-01d2-491a-8381-8afa492e01fb.png)
 2. Run the 'Pynt' collection. A new forked collection of your chosen collection will be created with the label of API-Security.
 ![image](https://user-images.githubusercontent.com/107360829/184634172-aee40f66-2227-4fa2-8304-374ab1362257.png)
