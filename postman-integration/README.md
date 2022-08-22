@@ -30,7 +30,8 @@ Fork 'Pynt' collection to you workspace:
 1. Enter https://www.postman.com/pynt-io/workspace/pynt
 2. From 'Pynt' collection menu, choose 'Create a fork' to fork 'Pynt' collection to your Workspace.
 ![image](https://user-images.githubusercontent.com/107360829/185942430-3a06263b-6ddc-4748-89e6-01444d3fa7fb.png)
-3. To run Pynt from your workspace, continue from the instructions in Pyn't collection description (also available below).
+3. Open your workspace from Postman desktop app.
+4. To run Pynt from your workspace, continue from the instructions in Pyn't collection description (also available below).
 
 ## How to Run:
  
