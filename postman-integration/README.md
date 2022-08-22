@@ -8,10 +8,9 @@ Pynt dynamic security test covers the OWASP-10 top API categories and retrieves 
 
 ## Prerequisites:
 
-This integration support Windows only.
 1. Ensure you are working with Postman app (install from https://www.postman.com/downloads). 
 Note that Pynt solution is based on docker, so it doesn't work with Postman for web, only with the desktop app.
-2. Ensure Docker desktop is available and running on your machine (install Docker from
+2. Ensure Docker desktop is available and running on your machine (for Windows, install Docker from
 https://www.docker.com/products/docker-desktop/).
 3. Ensure your functional test collection is available in your workspace.
 4. If your functional tests requires environment variables, make sure they are set.
