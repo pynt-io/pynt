@@ -53,6 +53,8 @@ This step should be repeated if you restarted your PC.
 To run Pynt from your workspace, continue from the instructions in Pynt's collection description (also available below).
 ![image](https://user-images.githubusercontent.com/107360829/186156656-dcc00c94-cc79-40ad-8b47-fc47d952ab9d.png)
 
+Make sure Pynt's docker is still up.
+
 1. Click on the 'Variables' tab of the 'Pynt' collection and fill the values of required parameters:
 - API-KEY - your postman API key - If you previously saved and have your API key, enter it here under the 'Current Value' tab. If not, enter       https://postman.co/settings/me/api-keys to generate or regenarete your API key as it can be copied only when created for security reasons. You won't need to modify     this parameter till your API-key will expire.
 ![image](https://user-images.githubusercontent.com/107360829/184632643-ba29d4d6-b4f6-4d8b-a025-bf42b5662639.png)
