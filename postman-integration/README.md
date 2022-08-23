@@ -32,6 +32,7 @@ Fork 'Pynt' collection to you workspace:
 ![image](https://user-images.githubusercontent.com/107360829/185942430-3a06263b-6ddc-4748-89e6-01444d3fa7fb.png)
 3. Open your workspace from Postman desktop app.
 4. To run Pynt from your workspace, continue from the instructions in Pyn't collection description (also available below).
+![image](https://user-images.githubusercontent.com/107360829/186156656-dcc00c94-cc79-40ad-8b47-fc47d952ab9d.png)
 
 ## How to Run:
  
