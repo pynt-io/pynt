@@ -57,8 +57,13 @@ docker run -d --pull always --network=host ghcr.io/pynt-io/pynt:postman-latest
 ![image](https://user-images.githubusercontent.com/107360829/185961165-76d9a2a2-e695-4d72-ac80-f98b41bad7ce.png)
 2. Run the 'Pynt' collection. A new forked collection of your chosen collection will be created with the label of API-Security.
 ![image](https://user-images.githubusercontent.com/107360829/185963531-1751f616-0cc9-427a-9df5-b413cf5f343f.png)
-3. Run the new security collection to get the security results!
-![image](https://user-images.githubusercontent.com/107360829/185970397-c93a32b1-99b2-4d88-8361-e6654de0fa61.png)
+3. Run the new security collection to get the security results:
+a. The security results for OWASP-10 categoroes will appear in the main console screen.
+![image](https://user-images.githubusercontent.com/107360829/186161712-0a121843-55f4-4e29-83ee-0083f02bfba8.png)
+b. For a failed test, click on the category, and then 'Respnse Body' to view the detailed result:
+![image](https://user-images.githubusercontent.com/107360829/186162606-1374285c-ff23-4251-b07c-5afdcae22616.png)
+c. Click on 'View Summary' to view the results summary.
+![image](https://user-images.githubusercontent.com/107360829/186162151-36c79cbe-fc71-4c9b-8ae5-bffb0ec417a5.png)
 4. In case you modified your functional test collection or you wish to refer to another test collection, go back to step 2.
 
 ## EULA and Privacy Policy
