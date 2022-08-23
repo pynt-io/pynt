@@ -45,6 +45,8 @@ docker run -d --pull always --network=host ghcr.io/pynt-io/pynt:postman-latest
 ```
 
 This step should be repeated if you restarted your PC.
+![image](https://user-images.githubusercontent.com/107360829/186167176-789f2ca8-4f61-48ee-a7e8-0a445586c7e9.png)
+
 
 ## How to Run:
 
