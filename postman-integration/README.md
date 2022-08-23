@@ -31,12 +31,7 @@ Fork 'Pynt' collection to you workspace:
 2. From 'Pynt' collection menu, choose 'Create a fork' to fork 'Pynt' collection to your Workspace.
 ![image](https://user-images.githubusercontent.com/107360829/185942430-3a06263b-6ddc-4748-89e6-01444d3fa7fb.png)
 3. Open your workspace from Postman desktop app.
-4. To run Pynt from your workspace, continue from the instructions in Pyn't collection description (also available below).
-![image](https://user-images.githubusercontent.com/107360829/186156656-dcc00c94-cc79-40ad-8b47-fc47d952ab9d.png)
-
-## How to Run:
- 
-1. Download and run Pynt docker by executing the following command via cmd 
+4. Download and run Pynt docker by executing the following command via cmd 
 
 Windows cmd or Mac terminal:
 ```
@@ -46,7 +41,13 @@ docker run -p 5001:5001 -d --pull always ghcr.io/pynt-io/pynt:postman-latest
 
 Linux terminal:
 ```
-docker run -d --pull always --network=host ghcr.io/pynt-io/pynt:postman-latest
+docker 
+5. To run Pynt from your workspace, continue from the instructions in Pynt's collection description (also available below).
+![image](https://user-images.githubusercontent.com/107360829/186156656-dcc00c94-cc79-40ad-8b47-fc47d952ab9d.png)
+
+## How to Run:
+ 
+run -d --pull always --network=host ghcr.io/pynt-io/pynt:postman-latest
 ```
 
 2. Click on the 'Variables' tab of the 'Pynt' collection and fill the values of required parameters:
@@ -59,9 +60,9 @@ docker run -d --pull always --network=host ghcr.io/pynt-io/pynt:postman-latest
 ![image](https://user-images.githubusercontent.com/107360829/185963531-1751f616-0cc9-427a-9df5-b413cf5f343f.png)
 3. Run the new security collection to get the security results:
 
-a. The security results for OWASP-10 categoroes will appear in the main console screen.
+a. The security results for OWASP-10 categories will appear on the main console screen.
 ![image](https://user-images.githubusercontent.com/107360829/186161712-0a121843-55f4-4e29-83ee-0083f02bfba8.png)
-b. For a failed test, click on the category, and then 'Respnse Body' to view the detailed result:
+b. For a failed test, click on the category, and then 'Response Body' to view the detailed result.
 ![image](https://user-images.githubusercontent.com/107360829/186162606-1374285c-ff23-4251-b07c-5afdcae22616.png)
 c. Click on 'View Summary' to view the results summary.
 ![image](https://user-images.githubusercontent.com/107360829/186162151-36c79cbe-fc71-4c9b-8ae5-bffb0ec417a5.png)
