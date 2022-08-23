@@ -58,6 +58,7 @@ docker run -d --pull always --network=host ghcr.io/pynt-io/pynt:postman-latest
 2. Run the 'Pynt' collection. A new forked collection of your chosen collection will be created with the label of API-Security.
 ![image](https://user-images.githubusercontent.com/107360829/185963531-1751f616-0cc9-427a-9df5-b413cf5f343f.png)
 3. Run the new security collection to get the security results:
+
 a. The security results for OWASP-10 categoroes will appear in the main console screen.
 ![image](https://user-images.githubusercontent.com/107360829/186161712-0a121843-55f4-4e29-83ee-0083f02bfba8.png)
 b. For a failed test, click on the category, and then 'Respnse Body' to view the detailed result:
