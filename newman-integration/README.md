@@ -13,8 +13,7 @@ You should be able also to integrate Pynt into your CI/CD pipeline seamlessly - 
 
 ## Prerequisites:
 
-1. Ensure Docker desktop is available and running on your machine (install Docker from
-https://www.docker.com/products/docker-desktop/).
+1. Ensure Docker engine is available and running on your machine: (install from https://docs.docker.com/engine/install/).
 2. Ensure your functional test collection is available in your workspace.
 3. If your functional tests requires environment variables, make sure they are set.
 4. Make sure your target is up.
