@@ -35,13 +35,13 @@ Fork 'Pynt' collection to you workspace:
 
 Windows cmd or Mac terminal:
 ```
-docker run -p 5001:5001 -d --pull always ghcr.io/pynt-io/pynt:postman-latest
+docker run -p 5001:5001 --pull always ghcr.io/pynt-io/pynt:postman-latest
 ```
 (the left port can be changed if already taken on your machine)
 
 Linux terminal:
 ```
-docker run -d --pull always --network=host ghcr.io/pynt-io/pynt:postman-latest
+docker run --pull always --network=host ghcr.io/pynt-io/pynt:postman-latest
 ```
 
 This step should be repeated if you restarted your PC.
