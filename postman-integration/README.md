@@ -29,7 +29,7 @@ Fork 'Pynt' collection to you workspace:
 1. Enter https://www.postman.com/pynt-io/workspace/pynt
 2. From 'Pynt' collection menu, choose 'Create a fork' to fork 'Pynt' collection to your Workspace.
 ![image](https://user-images.githubusercontent.com/107360829/185942430-3a06263b-6ddc-4748-89e6-01444d3fa7fb.png)
-3. Open your workspace from Postman desktop app.
+3. Open your workspace from the Postman desktop app.
 4. Download and run Pynt docker by executing the following command via cmd 
 
 Windows cmd or Mac terminal:
@@ -44,7 +44,7 @@ docker run --pull always --network=host ghcr.io/pynt-io/pynt:postman-latest
 ```
 
 This step should be repeated if you restarted your PC.
-![image](https://user-images.githubusercontent.com/107360829/186167176-789f2ca8-4f61-48ee-a7e8-0a445586c7e9.png)
+![image](https://user-images.githubusercontent.com/107360829/186774541-f12c14db-2c1f-41f3-919a-1bc77e9cedc5.png)
 
 
 ## How to Run:
