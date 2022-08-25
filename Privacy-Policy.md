@@ -5,7 +5,7 @@ Pynt.io takes your privacy seriously. To better protect your privacy we provide 
 
 ## Collection of Routine Information
 
-This app track basic information about their users. This information includes, but is not limited to, IP addresses, app details, test collections and timestamps. None of this information can personally identify specific user to this app. The information is tracked for routine administration and maintenance purposes.
+This app track basic information about their users. This information includes, but is not limited to, API key, IP addresses, app details, test collections and timestamps. None of this information can personally identify specific user to this app. The information is tracked for routine administration and maintenance purposes.
 
 
 ## Other Third Parties
