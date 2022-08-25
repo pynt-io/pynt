@@ -59,6 +59,7 @@ Make sure Pynt's docker is still up.
 ![image](https://user-images.githubusercontent.com/107360829/184632643-ba29d4d6-b4f6-4d8b-a025-bf42b5662639.png)
 - port - the left port number used in the docker run command (default-5001).
 - COLLECTION-NAME - your functional test collection name, e.g. 'Test Collection 1'. Pynt will refer to this collection to generate the automated security tests.
+- Click on 'Save'.
 ![image](https://user-images.githubusercontent.com/107360829/185961165-76d9a2a2-e695-4d72-ac80-f98b41bad7ce.png)
 2. Run the 'Pynt' collection. A new forked collection of your chosen collection will be created with the label of API-Security.
 ![image](https://user-images.githubusercontent.com/107360829/185963531-1751f616-0cc9-427a-9df5-b413cf5f343f.png)
