@@ -3,6 +3,7 @@
 ## Description:
 
 Pynt is an API security solution which generates automated security tests based on your existing functional test collection.
+Pynt collection gets your functional test name as an input variable, and creates an API security test collection that you can run within your workspace.
 Pynt dynamic security test covers the OWASP-10 top API categories ((https://owasp.org/www-project-api-security) and retrieves the results in few minutes.
 
 ## Prerequisites:
