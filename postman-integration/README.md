@@ -71,7 +71,9 @@ b. For a failed test, click on the category, and then 'Response Body' to view th
 ![image](https://user-images.githubusercontent.com/107360829/186162606-1374285c-ff23-4251-b07c-5afdcae22616.png)
 c. Click on 'View Summary' to view the results summary.
 ![image](https://user-images.githubusercontent.com/107360829/186162151-36c79cbe-fc71-4c9b-8ae5-bffb0ec417a5.png)
-4. In case you modified your functional test collection or you wish to refer to another test collection, go back to step 1.
+
+- In case modified your test collection, just re-run the security test.
+- In case you to refer to another test collection, start again from step 1.
 
 ## EULA and Privacy Policy
 
