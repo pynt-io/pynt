@@ -12,7 +12,7 @@ Pynt dynamic security test covers the OWASP-10 top API categories ((https://owas
 Note that Pynt solution is based on docker and requires access to local host, so it doesn't support the Postman web.
 2. Ensure Docker engine is available and running on your machine (install from https://docs.docker.com/engine/install/).
 3. Ensure your functional test collection is available in your workspace.
-4. If your functional tests requires environment variables, make sure they are set.
+4. If your functional test collection requires environment variables, make sure they are set.
 5. Make sure your target is up.
 
 
