@@ -13,7 +13,7 @@ Pynt’s API solution carries out automated hacks of your APIs to find the most 
 Pynt seamlessly integrates into existing development tools and CI/CD workflows. You choose how to use Pynt:
 - Directly from Postman:
 
-[![Run Pynt in Postman](https://run.pstmn.io/button.svg)](https://god.gw.postman.com/run-collection/20945803-3580d82b-6542-42ee-9330-11450bfdb7bc?action=collection%2Ffork&collection-url=entityId%3D20945803-3580d82b-6542-42ee-9330-11450bfdb7bc%26entityType%3Dcollection%26workspaceId%3D96ee59ad-45d9-477d-8704-1eb9d60cf195)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://god.gw.postman.com/run-collection/20945803-3580d82b-6542-42ee-9330-11450bfdb7bc?action=collection%2Ffork&collection-url=entityId%3D20945803-3580d82b-6542-42ee-9330-11450bfdb7bc%26entityType%3Dcollection%26workspaceId%3D96ee59ad-45d9-477d-8704-1eb9d60cf195)
 
 - As [Newman CLI wrapper](https://github.com/pynt-io/pynt/tree/main/newman-integration)
 - As part of [GitHub actions](https://github.com/pynt-io/pynt-newman)
