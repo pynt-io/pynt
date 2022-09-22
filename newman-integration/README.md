@@ -1,4 +1,5 @@
-![pynt-logo](https://user-images.githubusercontent.com/107360829/176185125-b2b9fce3-c9fc-4048-baa5-e5a21af5c31b.png)
+![Pynt logo 01b](https://user-images.githubusercontent.com/107360829/191698249-55b19b34-82c3-434a-818a-9b25055f1c5c.png)
+
 
 ## Description:
 
