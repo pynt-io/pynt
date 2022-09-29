@@ -1,0 +1,42 @@
+name: 'Pynt for Newman'
+description: 'Dynamic API Security Testing'
+author: 'Pynt.io'
+branding:
+  icon: 'check-circle'
+  color: 'blue'
+
+inputs:
+  base-path:
+    description: 'Path where Postman collection/environment files exist.'
+    required: true
+  postman-collection-filename:
+    description: 'Postman collection file name (should exist under "base-path").'
+    required: true
+  postman-environment-filename:
+    description: 'Postman environment file name (should exist under "base-path").'
+    required: false
+  fail-workflow:
+    description: 'Choose whether to fail the workflow if Pynt security tests return findings. Default: false'
+    required: false
+    default: "false"
+
+runs:
+  using: "composite"
+  steps:
+    - id: run_latest_pynt
+      shell: bash
+      run: |
+        [[ "${{ inputs.base-path }}" ]] || { echo "base-path input is empty" ; exit 1; }
+        [[ "${{ inputs.postman-collection-filename }}" ]] || { echo "postman-collection-filename input is empty" ; exit 1; }
+
+        echo "${{ toJson(github) }}" > ${{ inputs.base-path }}/github
+        docker pull ghcr.io/pynt-io/pynt:latest
+        
+        if [ -z "${{inputs.postman-environment-filename}}" ]
+        then
+          docker run -v "${{ inputs.base-path }}":/etc/pynt/ --rm --network="host"  ghcr.io/pynt-io/pynt:latest -c "${{ inputs.postman-collection-filename }}"  -r
+        else
+          docker run -v "${{ inputs.base-path }}":/etc/pynt/ --rm --network="host"  ghcr.io/pynt-io/pynt:latest -c "${{ inputs.postman-collection-filename }}" -e "${{ inputs.postman-environment-filename }}" -r
+        fi
+
+        if [ "${{inputs.fail-workflow}}" == "true" ] && test -f ${{ inputs.base-path }}/results/results.json; then exit 1 ; fi
