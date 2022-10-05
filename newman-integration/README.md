@@ -4,9 +4,9 @@
 
 ## Description:
 
-Pynt [(pynt.io)](https://www.pynt.io/) is an API Security testing solution built on top of Newman - a Postman collection runner.
+Pynt [(pynt.io)](https://www.pynt.io/) is a **free API Security testing solution** built on top of Newman - a Postman collection runner.
 
-Do you test your cloud app with Newman? now you can easily test for common API Security issues with the Pynt docker.
+Do you test your cloud app with Newman? now you can easily test for common API Security issues with the Pynt docker and get results in minutes!
 
 You can use Pynt docker in the same way you use Newman, with Pynt you get both the functional and the security test results.
 
