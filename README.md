@@ -4,16 +4,16 @@
   
 ## Description:
 
-Pynt brings API security to developers.
+Pynt brings API security to developers and testers.
 
-Pynt empowers developers to build secure APIs from the very start of the development process.
+Pynt empowers developers and testers to build secure APIs from the very start of the development process.
 
 Pynt’s developer-first approach allows organizations to secure the assets behind their APIs before they are released into production, ensuring that their products are secure at their most vulnerable components - APIs.
 
 Pynt’s API solution carries out automated hacks of your APIs to find the most critical issues and zero day vulnerabilities in less than two minutes, with no configuration required.
 
 Pynt seamlessly integrates into existing development tools and CI/CD workflows. You choose how to use Pynt:
-- Inside [Postman app](https://www.postman.com/pynt-io/workspace/pynt/overview)
+- Start from [Pynt's area in Postman public workspace](https://www.postman.com/pynt-io/workspace/pynt/overview)
 - As [Newman CLI wrapper](https://github.com/pynt-io/pynt/tree/main/newman-integration)
 - As part of [GitHub actions](https://github.com/pynt-io/pynt-newman)
 
