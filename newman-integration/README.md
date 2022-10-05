@@ -12,6 +12,7 @@ You can use Pynt docker in the same way you use Newman, with Pynt you get both t
 
 You should be able also to integrate Pynt into your CI/CD pipeline seamlessly - the same as you do with Newman.
 
+![pynt_run](https://user-images.githubusercontent.com/107360829/181883204-fed73a15-8c9a-4087-b28b-22f53884ed44.gif)
 
 ## Prerequisites:
 
@@ -64,8 +65,6 @@ You can use the following command line:
 ```
 docker run -v /Users/admin/AmazingProject/api_tests:/etc/pynt/ --rm --network="host"  ghcr.io/pynt-io/pynt:latest -c my_collection.postman_collection.json -e my_environment.postman_environment.json
 ```
-
-![pynt_run](https://user-images.githubusercontent.com/107360829/181883204-fed73a15-8c9a-4087-b28b-22f53884ed44.gif)
 
 ## EULA and Privacy Policy
 
