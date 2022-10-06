@@ -19,8 +19,8 @@ def main():
         if not os.path.exists(c):
             print("Collection file not found")
             exit()
-    if args.e:
-        e = args.e
+    if args.environment:
+        e = args.environment
         if not os.path.exists(e):
             print("Environment file not found")
             exit()
@@ -37,7 +37,7 @@ def main():
         shutil.copy(c, os.path.join(runningDir, "c.json"))
         
         command = ["-c", "c.json"]
-        if args.e:
+        if args.environment:
             shutil.copy(e, os.path.join(runningDir, "e.json"))
             command.extend(["-e", "e.json"])
 
