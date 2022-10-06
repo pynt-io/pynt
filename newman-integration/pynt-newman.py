@@ -9,9 +9,9 @@ def main():
     if sys.platform == "win32":
         os.system('color')
 
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(usage="pynt-newman.py <postman collection file> -e [postman environment file]")
     parser.add_argument('collection', help="path to your Postman collection")
-    parser.add_argument('-e', help="path to Postman environment file, if needed")
+    parser.add_argument('-e','--environment',metavar='', help="path to Postman environment file, if needed")
     args = parser.parse_args()
 
     if args.collection:
