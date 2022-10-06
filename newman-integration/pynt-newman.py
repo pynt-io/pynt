@@ -36,7 +36,7 @@ def main():
     with tempfile.TemporaryDirectory(dir = os.getcwd()) as runningDir:
         shutil.copy(c, os.path.join(runningDir, "c.json"))
         
-        command = ["--no-upload-logs", "-c", "c.json"]
+        command = ["-c", "c.json"]
         if args.e:
             shutil.copy(e, os.path.join(runningDir, "e.json"))
             command.extend(["-e", "e.json"])
