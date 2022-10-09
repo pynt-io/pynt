@@ -33,8 +33,11 @@ def main():
         print("Docker daemon is not running or not installed")
         exit()
 
-    image = client.images.pull("ghcr.io/pynt-io/pynt", "newman-latest")
-    
+    try:
+        image = client.images.pull("ghcr.io/pynt-io/pynt", "newman-latest")
+    except Exception as e:
+        print(e) #Golan's bug- docker was stuck- client was created but unable to run commands.
+
     with tempfile.TemporaryDirectory(dir = os.getcwd()) as runningDir:
         shutil.copy(c, os.path.join(runningDir, "c.json"))
         
@@ -48,14 +51,16 @@ def main():
                                         network="host", volumes=[runningDir + ":/etc/pynt"], auto_remove=True)
         output = run.attach(stdout=True, stream=True, logs=True)
         run.start()
-        for line in output:
-            try:
-                decoded = line.decode("utf-8")
-            except UnicodeDecodeError:
-                decoded = line
-            sys.stdout.write(decoded) ; sys.stdout.flush()
-        run.wait()
-        
+        try:
+            for line in output:
+                try:
+                    decoded = line.decode("utf-8")
+                except UnicodeDecodeError:
+                    decoded = line
+                sys.stdout.write(decoded) ; sys.stdout.flush()
+            run.wait()
+        except Exception as e:
+            print(e) #Ofer's error- most likely docker version
 
 if __name__ == "__main__":
     main()
