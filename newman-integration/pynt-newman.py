@@ -34,13 +34,14 @@ def main():
     image = client.images.pull("ghcr.io/pynt-io/pynt", "newman-latest")
   
     with tempfile.TemporaryDirectory(dir = os.getcwd()) as runningDir:
-        shutil.copy(c, os.path.join(runningDir, "c.json"))
+        cName = os.path.split(c)[-1]
+        shutil.copy(c, os.path.join(runningDir, cName))
         
-        command = ["-c", "c.json"]
+        command = ["-c", cName, "--no-upload-logs"]
         if args.environment:
-
-            shutil.copy(e, os.path.join(runningDir, "e.json"))
-            command.extend(["-e", "e.json"])
+            eName = os.path.split(e)[-1]
+            shutil.copy(e, os.path.join(runningDir, eName))
+            command.extend(["-e", eName])
 
         run = client.containers.create(image="ghcr.io/pynt-io/pynt:newman-latest", command=command,
                                         network="host", volumes=[runningDir + ":/etc/pynt"], auto_remove=True)
