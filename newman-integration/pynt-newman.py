@@ -33,7 +33,7 @@ def main():
         exit()
 
     try:
-        image = client.images.pull("ghcr.io/pynt-io/pynt", "newman-latest")
+        image = client.images.pull("ghcr.io/pynt-io/pynt", "latest")
     except docker.errors.DockerException as e: 
         print("There was an error while pulling the Pynt image,", e)
         exit()
