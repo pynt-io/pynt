@@ -16,13 +16,13 @@ def main():
         c = args.collection
         if not os.path.exists(c):
             print("Collection file not found")
-            exit()
+            exit(1)
 
     if args.environment:
         e = args.environment
         if not os.path.exists(e):
             print("Environment file not found")
-            exit()
+            exit(1)
     
     print("Setting up Pynt docker...")
     
@@ -30,13 +30,13 @@ def main():
         client = docker.from_env()
     except docker.errors.DockerException as e: 
         print("Docker daemon is not running or not installed,", e)
-        exit()
+        exit(1)
 
     try:
         image = client.images.pull("ghcr.io/pynt-io/pynt", "latest")
     except docker.errors.DockerException as e: 
         print("There was an error while pulling the Pynt image,", e)
-        exit()
+        exit(1)
   
     with tempfile.TemporaryDirectory(dir = os.getcwd()) as runningDir:
         cName = os.path.split(c)[-1]
