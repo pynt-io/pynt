@@ -20,18 +20,23 @@ def main():
 
     if args.environment:
         e = args.environment
-
         if not os.path.exists(e):
             print("Environment file not found")
             exit()
-
+    
+    print("Setting up Pynt docker...")
+    
     try:
         client = docker.from_env()
-    except docker.errors.APIError:
-        print("Docker daemon is not running or not installed")
+    except docker.errors.DockerException as e: 
+        print("Docker daemon is not running or not installed,", e)
         exit()
 
-    image = client.images.pull("ghcr.io/pynt-io/pynt", "newman-latest")
+    try:
+        image = client.images.pull("ghcr.io/pynt-io/pynt", "newman-latest")
+    except docker.errors.DockerException as e: 
+        print("There was an error while pulling the Pynt image,", e)
+        exit()
   
     with tempfile.TemporaryDirectory(dir = os.getcwd()) as runningDir:
         cName = os.path.split(c)[-1]
@@ -43,11 +48,10 @@ def main():
             shutil.copy(e, os.path.join(runningDir, eName))
             command.extend(["-e", eName])
 
-        run = client.containers.create(image="ghcr.io/pynt-io/pynt:newman-latest", command=command,
+        run = client.containers.create(image=image, command=command,
                                         network="host", volumes=[runningDir + ":/etc/pynt"], auto_remove=True)
         output = run.attach(stdout=True, stream=True, logs=True)
         run.start()
-        # try:
         for line in output:
             try:
                 decoded = line.decode("utf-8")
