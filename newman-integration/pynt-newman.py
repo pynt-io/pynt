@@ -49,18 +49,18 @@ def main():
         print("Docker daemon is not running or not installed,", e)
         exit(1)
 
-    with tempfile.TemporaryDirectory(dir = os.getcwd()) as runningDir:
-        cName = os.path.split(c)[-1]
-        shutil.copy(c, os.path.join(runningDir, cName))
+    with tempfile.TemporaryDirectory(dir = os.getcwd()) as running_dir:
+        c_name = os.path.split(c)[-1]
+        shutil.copy(c, os.path.join(running_dir, c_name))
         
-        command = ["-c", cName]
+        command = ["-c", c_name]
         if args.environment:
-            eName = os.path.split(e)[-1]
-            shutil.copy(e, os.path.join(runningDir, eName))
-            command.extend(["-e", eName])
+            e_name = os.path.split(e)[-1]
+            shutil.copy(e, os.path.join(running_dir, e_name))
+            command.extend(["-e", e_name])
 
         run = client.containers.create(image=image, command=command,
-                                        network="host", volumes={runningDir: {'bind': '/etc/pynt'}},
+                                        network="host", volumes={running_dir: {'bind': '/etc/pynt'}},
                                         auto_remove=True
         )
         output = run.attach(stdout=True, stream=True, logs=True)
