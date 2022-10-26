@@ -41,28 +41,28 @@ def main():
     
     try:
         client = docker.from_env()
+        image = client.images.pull("ghcr.io/pynt-io/pynt", "latest")
+    except (docker.errors.APIError, docker.errors.BuildError, TypeError) as e: 
+        print("There was an error while pulling the Pynt image,", e)
+        exit(1)
     except docker.errors.DockerException as e: 
         print("Docker daemon is not running or not installed,", e)
         exit(1)
 
-    try:
-        image = client.images.pull("ghcr.io/pynt-io/pynt", "latest")
-    except docker.errors.DockerException as e: 
-        print("There was an error while pulling the Pynt image,", e)
-        exit(1)
-  
     with tempfile.TemporaryDirectory(dir = os.getcwd()) as runningDir:
         cName = os.path.split(c)[-1]
         shutil.copy(c, os.path.join(runningDir, cName))
         
-        command = ["-c", cName, "--no-upload-logs"]
+        command = ["-c", cName]
         if args.environment:
             eName = os.path.split(e)[-1]
             shutil.copy(e, os.path.join(runningDir, eName))
             command.extend(["-e", eName])
 
         run = client.containers.create(image=image, command=command,
-                                        network="host", volumes=[runningDir + ":/etc/pynt"], auto_remove=True)
+                                        network="host", volumes={runningDir: {'bind': '/etc/pynt'}},
+                                        auto_remove=True
+        )
         output = run.attach(stdout=True, stream=True, logs=True)
         run.start()
         for line in output:
@@ -70,7 +70,8 @@ def main():
                 decoded = line.decode("utf-8")
             except UnicodeDecodeError:
                 decoded = line
-            sys.stdout.write(decoded) ; sys.stdout.flush()
+            sys.stdout.write(decoded)
+            sys.stdout.flush()
         run.wait()
 
 if __name__ == "__main__":
