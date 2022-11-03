@@ -15,7 +15,7 @@ Other third parties may track user activities on this app. Such tracking is done
 
 ## Security
 
-The security of your personal information is important to us, but remember that no method of transmission over the Internet, or method of electronic storage, is 100% secure. While we or strive to use commercially acceptable means to protect your personal information, we cannot guarantee its absolute security.
+The security of your personal information is important to us. We encrypt all PII information we track. Please note that no method of transmission over the Internet, or method of electronic storage, is 100% secure. While we or strive to use commercially acceptable means to protect your personal information, we cannot guarantee its absolute security.
 
 
 ## Changes To This Privacy Policy
