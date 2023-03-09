@@ -14,7 +14,7 @@ Pynt’s API solution carries out automated hacks of your APIs to find the most 
 
 Pynt seamlessly integrates into existing development tools and CI/CD workflows. You choose how to use Pynt:
 - Start from [Pynt's area in Postman public workspace](https://www.postman.com/pynt-io/workspace/pynt/overview)
-- As [Newman CLI wrapper](https://github.com/pynt-io/pynt/tree/main/newman-integration)
+- As [Newman CLI wrapper](https://docs.pynt.io/documentation/onboarding/getting-started/pynt-newman)
 - As part of [GitHub actions](https://github.com/pynt-io/pynt-newman)
 
 ## EULA and Privacy Policy
