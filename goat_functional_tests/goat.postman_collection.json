@@ -412,7 +412,7 @@
 	"variable": [
 		{
 			"key": "baseUrl",
-			"value": "http://44.202.3.35:6000/",
+			"value": "http://44.202.3.35:6000",
 			"type": "string"
 		}
 	]
