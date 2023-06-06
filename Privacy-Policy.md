@@ -23,8 +23,7 @@ For the purposes of this Privacy Policy:
 
 
 
-- __Company__ (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to Overcast Security LTD., Mishmar Hayarden 9.
-
+- __Company__ (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to Overcast Security LTD., Begin 154, Tel Aviv, Israel.
 
 
 - __Cookies__ are small files that are placed on Your computer, mobile device or any other device by a website, containing the details of Your browsing history on that website among its many uses.
