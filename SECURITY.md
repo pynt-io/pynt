@@ -1,4 +1,8 @@
-# Security and Disclosure Information Policy for the Containers Projects
+# Security and Disclosure Information Policy for Pynt's
+
+At Pynt, we are committed to maintaining the security of our systems and our customers' data. 
+We believe in transparent and responsible disclosure of security vulnerabilities. 
+Our policy outlines how we handle security vulnerabilities and related disclosures.
 
  * [Reporting a Vulnerability](#Reporting-a-Vulnerability)
  * [Security Announcements](#Security-Announcements)
@@ -6,30 +10,24 @@
 
 ## Reporting a Vulnerability
 
-If you think you've identified a security issue in a Containers project,
-please DO NOT report the issue publicly via the Github issue tracker,
-mailing list, or IRC. Instead, send an email with as many details as 
-possible to [security@lists.podman.io](mailto:security@lists.podman.io?subject=Security%20Vunerablity%20Report).
-This is a private mailing list for the core maintainers.
-
-Please do **not** create a public issue.
+If you discover a security vulnerability within any of Pynt's services or products, we encourage you to report it to us as soon as possible. 
+We request that you follow these guidelines:
+Email us at support@pynt.io with a detailed description of the vulnerability.
+Please provide sufficient details to enable us to reproduce and verify the issue.
+Do not disclose the vulnerability publicly or to any third parties before it is resolved.
 
 ## Security Announcements
 
-The [podman@lists.podman.io](mailto:podman@lists.podman.io) email list is used for messages about
-Podman security announcements as well as general announcements and
-discussions.
-You can join the list [here](https://lists.podman.io/admin/lists/podman.lists.podman.io/)
-or by sending an email to [podman-join@lists.podman.io](mailto:podman-join@lists.podman.io?subject=subscribe)
-with the word "subscribe" in the subject.
+Pynt will make public announcements regarding significant security issues that affect our products or services.
+These announcements will be made through our slack community channel.
+You can join here [https://www.pynt.io/community](url)
 
 ## Security Vulnerability Response
 
-Each report is acknowledged and analyzed by the core maintainers within 3 working days.
-
-Any vulnerability information shared with core maintainers stays within a Containers project
-and will not be disseminated to other projects unless it is necessary to get the issue fixed.
-
-As the security issue moves from triage, to an identified fix, to release planning, the core
-maintainers will keep the reporter updated.
-
+Upon receiving a vulnerability report, Pynt's security team will investigate the issue.
+We aim to acknowledge receipt of your report within 3 working days.
+Our team will work diligently to verify the vulnerability and assess its impact.
+We will communicate with the reporter throughout the resolution process.
+Once the vulnerability is resolved, we will provide an advisory to our users with details about the issue and the steps taken to address it.
+We appreciate the efforts of security researchers and users who report vulnerabilities in a responsible manner. 
+Our aim is to collaborate effectively to ensure the security and privacy of our users and systems.
