@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pynt
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pynt
+  template:
+    metadata:
+      labels:
+        app: pynt
+    spec:
+      containers:
+        - name: pynt
+          image: ghcr.io/pynt-io/pynt:proxy-latest
+          env:
+            - name: ENV_VARIABLE_NAME
+              value: "env_variable_value"
+            - name: PYNT_SAAS_URL
+              value: "https://api.pynt.io/v1"
+            - name: PYNT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: pynt-creds
+                  key: pyntid
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pynt
+spec:
+  selector:
+    app: pynt
+  ports:
+    - name: proxy
+      protocol: TCP
+      port: 6666
+      targetPort: 6666
+    - name: controller
+      protocol: TCP
+      port: 5001
+      targetPort: 5001
