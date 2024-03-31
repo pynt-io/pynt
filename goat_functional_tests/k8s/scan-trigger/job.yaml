@@ -1,0 +1,67 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: scan-trigger-deployment
+spec:
+  template:
+    metadata:
+      labels:
+        app: scan-trigger
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: scan-trigger
+          image: alpine:latest
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              apk add --no-cache curl
+              apk add --no-cache wget
+              apk add --no-cache python3
+              apk add --no-cache py3-pip
+              apk add --no-cache py3-pytest
+              apk add --no-cache py3-requests
+
+              base_url="http://pynt"
+              wget https://raw.githubusercontent.com/pynt-io/pynt/main/goat_functional_tests/goat_functional_test.py -O goat.py
+
+              scan_id=$(curl -X PUT $base_url:5001/api/proxy/start)
+              echo $scan_id
+              export HTTP_PROXY=$base_url:6666
+              export HTTPS_PROXY=$base_url:6666
+              pytest goat.py
+              export HTTP_PROXY=""
+              export HTTPS_PROXY=""
+              curl -X PUT $base_url:5001/api/proxy/stop -d "$scan_id" -H "Content-Type: application/json"
+
+              temp_output="temp_output.txt"
+              final_output="final_output.html"
+              scan_id_param=$(echo "$scan_id" | sed -e 's/[{}"]//g' -e 's/:/=/')
+              echo $scan_id_param
+
+              sleep 0.5
+
+              # Polling loop
+              while true; do
+                  # Check of Pynt scan completed
+                  status_code=$(curl -o "$temp_output" -s -w "%{http_code}\n" $base_url:5001/api/report?$scan_id_param)
+
+                  # Check if the status code is 200 - meaning Pynt has finished
+                  if [ "$status_code" -eq 200 ]; then
+                      echo "Pynt scan completed ! The request returned a 200 status code. Output saved to $final_output"
+                      
+                      # Move the temporary file to the final output file
+                      mv "$temp_output" "$final_output"
+                      break # Exit the loop
+                  else
+                      echo "Waiting for a 200 status code... Received status code: $status_code"
+                  fi
+
+                  # Wait for 500 milliseconds before the next attempt
+                  sleep 0.5
+              done
+
+              # Clean up the temporary file if it still exists
+              if [ -f "$temp_output" ]; then
+                  rm "$temp_output"
+              fi
