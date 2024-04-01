@@ -19,32 +19,42 @@ spec:
               apk add --no-cache wget
               apk add --no-cache python3
               apk add --no-cache py3-pip
+              apk add --no-cache jq
               apk add --no-cache py3-pytest
               apk add --no-cache py3-requests
 
               base_url="http://pynt"
+              applicationId=""
+              testName="goat test"
+
+              # get the pytest file
               wget https://raw.githubusercontent.com/pynt-io/pynt/main/goat_functional_tests/goat_functional_test.py -O goat.py
 
+              # Start Pynt proxy
               scan_id=$(curl -X PUT $base_url:5001/api/proxy/start)
-              echo $scan_id
+              scan_id_param=$(echo "$scan_id" | jq -r '.scanId')
+
+              echo "Scan ID: $scan_id_param"
+
               export HTTP_PROXY=$base_url:6666
               export HTTPS_PROXY=$base_url:6666
               pytest goat.py
               export HTTP_PROXY=""
               export HTTPS_PROXY=""
-              curl -X PUT $base_url:5001/api/proxy/stop -d "$scan_id" -H "Content-Type: application/json"
+
+              # Stop Pynt proxy and start Pynt scan
+              json_payload=$(printf '{"scanId": "%s", "applicationId": "%s", "testName": "%s"}' "$scan_id_param" "$applicationId" "$testName")
+              curl -X PUT "$base_url:5001/api/proxy/stop" -d "$json_payload" -H "Content-Type: application/json"
 
               temp_output="temp_output.txt"
               final_output="final_output.html"
-              scan_id_param=$(echo "$scan_id" | sed -e 's/[{}"]//g' -e 's/:/=/')
-              echo $scan_id_param
 
-              sleep 0.5
+              sleep 1
 
               # Polling loop
               while true; do
                   # Check of Pynt scan completed
-                  status_code=$(curl -o "$temp_output" -s -w "%{http_code}\n" $base_url:5001/api/report?$scan_id_param)
+                  status_code=$(curl -o "$temp_output" -s -w "%{http_code}\n" $base_url:5001/api/report?scanId=$scan_id_param)
 
                   # Check if the status code is 200 - meaning Pynt has finished
                   if [ "$status_code" -eq 200 ]; then
@@ -57,8 +67,7 @@ spec:
                       echo "Waiting for a 200 status code... Received status code: $status_code"
                   fi
 
-                  # Wait for 500 milliseconds before the next attempt
-                  sleep 0.5
+                  sleep 1
               done
 
               # Clean up the temporary file if it still exists
