@@ -1,4 +1,4 @@
-name: Example pynt yml 
+name: Example pynt vs goat
 on: 
   workflow_dispatch:
     inputs: 
@@ -17,9 +17,12 @@ jobs:
     - name: install pynt cli
       run: | 
         python3 -m pip install --upgrade pyntcli 
-    - name: get goat collection 
+    - name: get goat funtional tests 
       run: | 
-        curl https://raw.githubusercontent.com/pynt-io/pynt/main/goat_functional_tests/goat.postman_collection.json -o goat.json 
-    - name: run pynt with newman integration 
+        curl https://raw.githubusercontent.com/pynt-io/pynt/main/goat_functional_tests/goat_functional_test.py -o goat_e2e.py 
+    - name: Run goat functional tests
+      run: |
+        pytest goat_e2e.py
+    - name: run pynt on the funcional tests 
       run: | 
-        pynt newman --collection goat.json --reporters --return-error=errors-only
+        pynt command --cmd "pytest goat_e2e.py" --reporters --return-error=errors-only
