@@ -22,6 +22,7 @@ jobs:
         curl https://raw.githubusercontent.com/pynt-io/pynt/main/goat_functional_tests/goat_functional_test.py -o goat_e2e.py 
     - name: Run goat functional tests
       run: |
+        python3 -m pip install pytest
         pytest goat_e2e.py
     - name: run pynt on the funcional tests 
       run: | 
