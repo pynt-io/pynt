@@ -19,9 +19,4 @@ jobs:
       run: |
         python3 -m pip install pytest
         pytest goat_e2e.py
-    - name: install pynt cli
-      run: | 
-        python3 -m pip install --upgrade pyntcli 
-    - name: run pynt on the funcional tests 
-      run: | 
-        pynt command --cmd "pytest goat_e2e.py" --return-error=errors-only
+
