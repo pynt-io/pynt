@@ -26,4 +26,4 @@ jobs:
         pytest goat_e2e.py
     - name: run pynt on the funcional tests 
       run: | 
-        pynt command --cmd "pytest goat_e2e.py" --reporters --return-error=errors-only
+        pynt command --cmd "pytest goat_e2e.py" --return-error=errors-only
