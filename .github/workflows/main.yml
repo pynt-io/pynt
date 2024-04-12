@@ -1,4 +1,4 @@
-name: Example pynt vs goat
+name: goat end 2 end functional tests
 on: 
   workflow_dispatch:
     inputs: 
@@ -6,17 +6,12 @@ on:
         type: string 
         default: "API Security tests"
 
-env:
-  PYNT_ID: ${{ secrets.YOURPYNTID }}
 
 jobs:
  api-security:
   runs-on: ubuntu-latest
 
   steps: 
-    - name: install pynt cli
-      run: | 
-        python3 -m pip install --upgrade pyntcli 
     - name: get goat funtional tests 
       run: | 
         curl https://raw.githubusercontent.com/pynt-io/pynt/main/goat_functional_tests/goat_functional_test.py -o goat_e2e.py 
@@ -24,6 +19,9 @@ jobs:
       run: |
         python3 -m pip install pytest
         pytest goat_e2e.py
+    - name: install pynt cli
+      run: | 
+        python3 -m pip install --upgrade pyntcli 
     - name: run pynt on the funcional tests 
       run: | 
         pynt command --cmd "pytest goat_e2e.py" --return-error=errors-only
