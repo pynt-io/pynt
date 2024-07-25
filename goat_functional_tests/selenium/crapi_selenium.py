@@ -22,13 +22,6 @@ def get_webdriver(browser):
     
         return webdriver.Chrome(options=chrome_options) 
 
-    if browser == "FIREFOX":
-        options = Options()
-        options.headless = True
-        geckodriver_path = '/home/ori/bin/geckodriver'
-        service = Service(executable_path=geckodriver_path)
-        return webdriver.Firefox(service=service, options=options)
-
 def register_user():
     url = "http://localhost:8888/identity/api/auth/signup"
     fake = Faker()
