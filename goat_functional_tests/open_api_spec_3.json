@@ -1,0 +1,166 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Example API",
+      "description": "API for managing user login, accounts, and transactions.",
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "http://44.202.3.35:6000",
+        "description": "Local development server"
+      }
+    ],
+    "paths": {
+      "/login": {
+        "post": {
+          "summary": "User login",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "userName": {
+                      "type": "string",
+                      "example": "James"
+                    },
+                    "password": {
+                      "type": "string",
+                      "example": "ILoveGuitars"
+                    }
+                  },
+                  "required": ["userName", "password"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Successful login",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "token": {
+                        "type": "string",
+                        "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Unauthorized, invalid credentials"
+            }
+          }
+        }
+      },
+      "/account": {
+        "get": {
+          "summary": "Get user account details",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "User account information",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "userId": {
+                        "type": "string",
+                        "example": "12345"
+                      },
+                      "userName": {
+                        "type": "string",
+                        "example": "James"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Unauthorized, invalid token"
+            }
+          }
+        }
+      },
+      "/transactions": {
+        "get": {
+          "summary": "Get user transactions",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "parameters": [
+            {
+              "name": "limit",
+              "in": "query",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "example": 5
+              }
+            },
+            {
+              "name": "userId",
+              "in": "query",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "example": "12345"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "List of transactions",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "transactionId": {
+                          "type": "string",
+                          "example": "txn_12345"
+                        },
+                        "amount": {
+                          "type": "number",
+                          "format": "float",
+                          "example": 100.5
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Unauthorized, invalid token"
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "securitySchemes": {
+        "bearerAuth": {
+          "type": "http",
+          "scheme": "bearer",
+          "bearerFormat": "JWT"
+        }
+      }
+    }
+  }
