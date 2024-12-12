@@ -28,6 +28,12 @@ type accountResponse struct {
 	UserID string `json:"userId"`
 }
 
+type gqlResponse struct {
+	Data struct {
+		Me accountResponse `json:"me"`
+	} `json:"data"`
+}
+
 func sendRequest(req *http.Request, authorization string) (*http.Response, error) {
 	client := &http.Client{}
 	if authorization != "" {
@@ -49,6 +55,17 @@ func login(userName, password string) (*http.Response, error) {
 
 func getAccount(authorization string) (*http.Response, error) {
 	req, _ := http.NewRequest("GET", baseURL+"/account", nil)
+	return sendRequest(req, authorization)
+}
+
+func getAccountViaGraphql(authorization string) (*http.Response, error) {
+	query := map[string]string{
+		"query": "query { me { userId } }",
+	}
+	jsonQuery, _ := json.Marshal(query)
+
+	req, _ := http.NewRequest("POST", baseURL+"/graphql", bytes.NewBuffer(jsonQuery))
+	req.Header.Set("Content-Type", "application/json")
 	return sendRequest(req, authorization)
 }
 
@@ -123,6 +140,20 @@ func TestGetLarsUserInfo(t *testing.T) {
 	var accountResp accountResponse
 	json.Unmarshal(body, &accountResp)
 	larsUID = accountResp.UserID
+}
+
+func TestGetLarsUserInfoViaGraphql(t *testing.T) {
+	assert.NotNil(t, larsToken)
+	assert.NotNil(t, larsUID)
+
+	resp, err := getAccountViaGraphql(larsToken)
+	assert.NoError(t, err)
+	assert.Equal(t, http.StatusOK, resp.StatusCode)
+
+	body, _ := ioutil.ReadAll(resp.Body)
+	var graphqlResponse gqlResponse
+	json.Unmarshal(body, &graphqlResponse)
+	assert.Equal(t, larsUID, graphqlResponse.Data.Me.UserID)
 }
 
 func TestGetLarsTransactions(t *testing.T) {

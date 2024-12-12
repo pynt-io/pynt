@@ -66,6 +66,23 @@ class TestLogin:
         assert resp.status_code == 200 
         pytest.james_uid = resp.json()["userId"]
 
+    def test_get_james_user_info_from_graphql(self, james_token, james_uid):
+        query = """query {
+            me {
+                userId
+            }
+        }"""
+        resp = self._send_request(requests.Request(
+            url=self.base_url + "/graphql",
+            method="POST",
+            json={"query": query}
+        ), authorization=james_token)
+
+        assert resp.status_code == 200
+        james_info = resp.json()["data"]["me"]
+        assert james_info["userId"] == james_uid
+
+
     def test_get_james_transactions(self, james_token, james_uid):
         resp = self.get_transactions(james_token, james_uid, limit=5)
         assert resp.status_code == 200 
