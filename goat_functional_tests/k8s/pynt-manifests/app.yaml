@@ -14,12 +14,9 @@ spec:
     spec:
       containers:
         - name: pynt
-          image: ghcr.io/pynt-io/pynt:proxy-latest
+          image: ghcr.io/pynt-io/pynt:v1-latest
+          args: ["proxy"]
           env:
-            - name: ENV_VARIABLE_NAME
-              value: "env_variable_value"
-            - name: PYNT_SAAS_URL
-              value: "https://api.pynt.io/v1"
             - name: PYNT_ID
               valueFrom:
                 secretKeyRef:
