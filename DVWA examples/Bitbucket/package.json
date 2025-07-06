@@ -1,0 +1,10 @@
+{
+  "name": "dvwa-playwright",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "devDependencies": {
+    "playwright": "^1.44.1"
+  }
+}
