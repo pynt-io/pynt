@@ -1,0 +1,28 @@
+image: mcr.microsoft.com/playwright:v1.44.0-jammy
+
+pipelines:
+  default:
+    - step:
+        name: Run DVWA and Playwright Tests
+        services:
+          - dvwa
+        caches:
+          - node
+        script:
+          - npm install
+          - npx playwright install --with-deps
+          - echo "Waiting for DVWA to be ready..."
+          - until curl -sSf http://localhost:80/login.php > /dev/null; do sleep 3; done
+          - echo "DVWA is up!"
+          - npm run test
+          - export PYNT_ID=$PYNT_ID          
+          - wget https://cdn.pynt.io/binary-release/install.sh
+          - chmod +x install.sh
+          - ./install.sh
+          - export RUNNING_FROM_PYNT=true
+          - ~/.pynt/bin/pynt command --cmd "npm run test" --application-name dvwa_playwright
+
+definitions:
+  services:
+    dvwa:
+      image: vulnerables/web-dvwa
