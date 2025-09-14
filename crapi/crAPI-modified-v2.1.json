@@ -1,0 +1,4335 @@
+{
+	"info": {
+		"_postman_id": "70c72275-e112-4542-a5f3-4ba2976cfc44",
+		"name": "crAPI Accepted",
+		"description": "crAPI Training Scripts",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18686113"
+	},
+	"item": [
+		{
+			"name": "Signup example.com",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');",
+							"var xff = Property.replaceSubstitutions('{{$randomIP}}');",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);",
+							"pm.request.headers.remove('X-Forwarded-For');",
+							"pm.request.headers.add({ ",
+							"    // These keys appears when you set a header by hand. Just for fun they are here",
+							"    disabled: false,",
+							"    // Your header, effectively",
+							"    key: 'X-Forwarded-For', ",
+							"    value: xff",
+							"});",
+							"let name = Property.replaceSubstitutions('{{$randomFirstName}}.{{$randomLastName}}');",
+							"pm.collectionVariables.set(\"name\", name);",
+							"let newName = Property.replaceSubstitutions('{{$randomFirstName}}.{{$randomLastName}}');",
+							"pm.collectionVariables.set(\"new_name\", newName);",
+							"let email = name+\"@example.com\";",
+							"let newEmail = newName+\"@example.com\";",
+							"let pass = Property.replaceSubstitutions(\"{{$randomPassword}}\");",
+							"let phone = Property.replaceSubstitutions(\"{{$randomPhoneNumber}}\").replace(/-/g,'');",
+							"pm.collectionVariables.set(\"email\", email);",
+							"pm.collectionVariables.set(\"new_email\", newEmail);",
+							"pm.collectionVariables.set(\"password\", pass);",
+							"pm.collectionVariables.set(\"name\", name);",
+							"pm.collectionVariables.set(\"phone\", phone);",
+							"console.log(email, newEmail, pass, phone);",
+							"console.log(name );"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"{{name}}\",\"email\":\"{{email}}\",\"number\":\"{{phone}}\",\"password\":\"{{password}}\"}"
+				},
+				"url": {
+					"raw": "{{url}}/identity/api/auth/signup",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"identity",
+						"api",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    var jsonData = JSON.parse(responseBody);",
+							"    pm.collectionVariables.set(\"token\", jsonData.token);",
+							"    var token = pm.collectionVariables.get(\"token\");",
+							"    pm.test(\"Token is set\", function () {",
+							"        pm.expect(jsonData.token).to.eql(token);",
+							"    });",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = pm.collectionVariables.get('X-Forwarded-For');\r",
+							"if (!xff){\r",
+							"    xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"    \r",
+							"}\r",
+							"console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\":\"{{email}}\",\"password\":\"{{password}}\"}"
+				},
+				"url": {
+					"raw": "{{url}}/identity/api/auth/login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"identity",
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Verify JWT Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"token\": \"{{token}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/identity/api/auth/verify",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"identity",
+						"api",
+						"auth",
+						"verify"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Forgot Password",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    var jsonData = JSON.parse(responseBody);",
+							"    pm.test(\"Body matches string\", function () {",
+							"        pm.expect(pm.response.text()).to.include(\"OTP Sent\");",
+							"    });",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = pm.collectionVariables.get('X-Forwarded-For');\r",
+							"if (!xff){\r",
+							"    xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"    \r",
+							"}\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\":\"{{email}}\"}"
+				},
+				"url": {
+					"raw": "{{url}}/identity/api/auth/forget-password",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"identity",
+						"api",
+						"auth",
+						"forget-password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SearchMailOTP",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"",
+							"function dynamicSort(property) {",
+							"    var sortOrder = 1;",
+							"    if(property[0] === \"-\") {",
+							"        sortOrder = -1;",
+							"        property = property.substr(1);",
+							"    }",
+							"    return function (a,b) {",
+							"        /* next line works with strings and numbers, ",
+							"         * and you may want to customize it to your needs",
+							"         */",
+							"        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;",
+							"        return result * sortOrder;",
+							"    }",
+							"}",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    var jsonData = JSON.parse(responseBody);",
+							"    var mails = jsonData.items;",
+							"",
+							"    pm.test(\"Get OTP\", function () {",
+							"        pm.expect(mails.length).to.be.gt(0);",
+							"        var mail = mails[0];",
+							"        console.log(mail);",
+							"        //mails.sort(dynamicSort(\"Created\"));",
+							"        var mail = mails[0];",
+							"        var mbody = mail['Raw']['Data'].replace(/[^a-zA-Z0-9<>:]*\\n/g, \"\");",
+							"        console.log(mail);",
+							"        var otpmatch = mbody.match(/generated otp is: ([0-9]+)/);",
+							"        console.log(otpmatch);",
+							"        var otp = otpmatch[1]",
+							"        console.log(\"OTP: \"+ otp);",
+							"        pm.collectionVariables.set(\"OTP\", otp);",
+							"    });",
+							"    ",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = pm.collectionVariables.get('X-Forwarded-For');\r",
+							"if (!xff){\r",
+							"    xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"    \r",
+							"}\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "{{url_mail}}/api/v2/search?kind=to&query={{email}}&limit=10",
+					"host": [
+						"{{url_mail}}"
+					],
+					"path": [
+						"api",
+						"v2",
+						"search"
+					],
+					"query": [
+						{
+							"key": "kind",
+							"value": "to"
+						},
+						{
+							"key": "query",
+							"value": "{{email}}"
+						},
+						{
+							"key": "limit",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check OTP V2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = pm.collectionVariables.get('X-Forwarded-For');\r",
+							"if (!xff){\r",
+							"    xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"    \r",
+							"}\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"{{email}}\",\n    \"otp\": \"{{OTP}}\",\n    \"password\": \"{{password}}\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/identity/api/auth/v2/check-otp",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"identity",
+						"api",
+						"auth",
+						"v2",
+						"check-otp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check OTP",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = pm.collectionVariables.get('X-Forwarded-For');\r",
+							"if (!xff){\r",
+							"    xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"    \r",
+							"}\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"{{email}}\",\n    \"otp\": \"{{OTP}}\",\n    \"password\": \"{{password}}\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/identity/api/auth/v3/check-otp",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"identity",
+						"api",
+						"auth",
+						"v3",
+						"check-otp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Resend vehicle email",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = pm.collectionVariables.get('X-Forwarded-For');\r",
+							"if (!xff){\r",
+							"    xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"    \r",
+							"}\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/identity/api/v2/vehicle/resend_email",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"identity",
+						"api",
+						"v2",
+						"vehicle",
+						"resend_email"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SearchMailVehicle",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"function dynamicSort(property) {",
+							"    var sortOrder = 1;",
+							"    if(property[0] === \"-\") {",
+							"        sortOrder = -1;",
+							"        property = property.substr(1);",
+							"    }",
+							"    return function (a,b) {",
+							"        /* next line works with strings and numbers, ",
+							"         * and you may want to customize it to your needs",
+							"         */",
+							"        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;",
+							"        return result * sortOrder;",
+							"    }",
+							"}",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    var jsonData = JSON.parse(responseBody);",
+							"    var mails = jsonData.items;",
+							"",
+							"    pm.test(\"Your test name\", function () {",
+							"        pm.expect(mails.length).to.be.gt(0);",
+							"        console.log(mails[0]);",
+							"        //mails.sort(dynamicSort(\"Created\"));",
+							"        console.log(mails[0]);",
+							"        var mail = mails[0];",
+							"        var mbody = mail['Raw']['Data'].replace(/[^a-zA-Z0-9<>:]*\\n/g, \"\");",
+							"        var vintext = mbody.match(/VIN(.*)Pincode/i);",
+							"        console.log(vintext);",
+							"        var VIN = vintext[1].match(/>([A-Za-z0-9]+)</)[1];",
+							"        console.log(\"VIN: \" + VIN);",
+							"        var pintext = mbody.match(/Pincode(.*)We're/);",
+							"        console.log(pintext);",
+							"        var PIN = pintext[1].match(/>([0-9]+)</)[1];",
+							"        console.log(\"PIN: \"+ PIN);",
+							"        pm.collectionVariables.set(\"VIN\", VIN);",
+							"        pm.collectionVariables.set(\"PIN\", PIN);",
+							"    });",
+							"    ",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = pm.collectionVariables.get('X-Forwarded-For');\r",
+							"if (!xff){\r",
+							"    xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"    \r",
+							"}\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url_mail}}/api/v2/search?kind=to&query={{email}}&limit=10",
+					"host": [
+						"{{url_mail}}"
+					],
+					"path": [
+						"api",
+						"v2",
+						"search"
+					],
+					"query": [
+						{
+							"key": "kind",
+							"value": "to"
+						},
+						{
+							"key": "query",
+							"value": "{{email}}"
+						},
+						{
+							"key": "limit",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Vehicle from Mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = pm.collectionVariables.get('X-Forwarded-For');\r",
+							"if (!xff){\r",
+							"    xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"    \r",
+							"}\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"vin\": \"{{VIN}}\", \"pincode\": \"{{PIN}}\"}"
+				},
+				"url": {
+					"raw": "{{url}}/identity/api/v2/vehicle/add_vehicle",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"identity",
+						"api",
+						"v2",
+						"vehicle",
+						"add_vehicle"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Dashboard",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = pm.collectionVariables.get('X-Forwarded-For');\r",
+							"if (!xff){\r",
+							"    xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"    \r",
+							"}\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/identity/api/v2/user/dashboard",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"identity",
+						"api",
+						"v2",
+						"user",
+						"dashboard"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get vehicles",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    var jsonData = pm.response.json();",
+							"    pm.collectionVariables.set(\"vehicle_id\", jsonData[0].uuid);",
+							"    pm.collectionVariables.set(\"VIN\", jsonData[0].vin);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = pm.collectionVariables.get('X-Forwarded-For');\r",
+							"if (!xff){\r",
+							"    xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"    \r",
+							"}\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/identity/api/v2/vehicle/vehicles",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"identity",
+						"api",
+						"v2",
+						"vehicle",
+						"vehicles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get vehicle location",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = pm.collectionVariables.get('X-Forwarded-For');\r",
+							"if (!xff){\r",
+							"    xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"    \r",
+							"}\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/identity/api/v2/vehicle/{{vehicle_id}}/location",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"identity",
+						"api",
+						"v2",
+						"vehicle",
+						"{{vehicle_id}}",
+						"location"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validate coupon",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = pm.collectionVariables.get('X-Forwarded-For');\r",
+							"if (!xff){\r",
+							"    xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"    \r",
+							"}\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtb25zdGVyQGRhcmt3ZWIuY29tIiwiaWF0IjoxNjA4MDMxMDk5LCJleHAiOjE2MDgxMTc0OTl9.lQr14VeNm_lOmKiOIKwO6mRu_47VEU8HVWEsyBzbeaVXzIthwnTC4mNmYb0qNW2--T20_P9sOjTWtMJjKRQCJA"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"coupon_code\":\"TRAC075\"}"
+				},
+				"url": {
+					"raw": "{{url}}/community/api/v2/coupon/validate-coupon",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"community",
+						"api",
+						"v2",
+						"coupon",
+						"validate-coupon"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Apply coupon",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = pm.collectionVariables.get('X-Forwarded-For');\r",
+							"if (!xff){\r",
+							"    xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"    \r",
+							"}\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"coupon_code\":\"TRAC075\",\"amount\":7500}"
+				},
+				"url": {
+					"raw": "{{url}}/workshop/api/shop/apply_coupon",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"workshop",
+						"api",
+						"shop",
+						"apply_coupon"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create post ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    var jsonData = JSON.parse(responseBody);",
+							"    var order = jsonData.id;",
+							"    pm.collectionVariables.set(\"post_id\", order);",
+							"    console.log(order);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = pm.collectionVariables.get('X-Forwarded-For');\r",
+							"if (!xff){\r",
+							"    xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"    \r",
+							"}\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"title\":\"{{$randomLoremSentence}}\",\"content\":\"{{$randomLoremParagraph}}\"}"
+				},
+				"url": {
+					"raw": "{{url}}/community/api/v2/community/posts",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"community",
+						"api",
+						"v2",
+						"community",
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    ",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = pm.collectionVariables.get('X-Forwarded-For');\r",
+							"if (!xff){\r",
+							"    xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"    \r",
+							"}\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/community/api/v2/community/posts/{{post_id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"community",
+						"api",
+						"v2",
+						"community",
+						"posts",
+						"{{post_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get recent posts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = pm.collectionVariables.get('X-Forwarded-For');\r",
+							"if (!xff){\r",
+							"    xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"    \r",
+							"}\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/community/api/v2/community/posts/recent?limit=100&offset=0",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"community",
+						"api",
+						"v2",
+						"community",
+						"posts",
+						"recent"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "100"
+						},
+						{
+							"key": "offset",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post comment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = pm.collectionVariables.get('X-Forwarded-For');\r",
+							"if (!xff){\r",
+							"    xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"    \r",
+							"}\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"content\":\"{{$randomLoremSentence}}\"}"
+				},
+				"url": {
+					"raw": "{{url}}/community/api/v2/community/posts/{{post_id}}/comment",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"community",
+						"api",
+						"v2",
+						"community",
+						"posts",
+						"{{post_id}}",
+						"comment"
+					]
+				},
+				"description": "Post comment"
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Mechanics",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = pm.collectionVariables.get('X-Forwarded-For');\r",
+							"if (!xff){\r",
+							"    xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"    \r",
+							"}\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/workshop/api/mechanic",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"workshop",
+						"api",
+						"mechanic"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Contact mechanic",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    var jsonData = pm.response.json();",
+							"    pm.collectionVariables.set(\"report_id\", jsonData.response_from_mechanic_api.id);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = pm.collectionVariables.get('X-Forwarded-For');\r",
+							"if (!xff){\r",
+							"    xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"    \r",
+							"}\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtb25zdGVyQGRhcmt3ZWIuY29tIiwiaWF0IjoxNjA4NTQzODI0LCJleHAiOjE2MDg2MzAyMjR9.AAIvhrtstlloPf7-NNCcmhEZm-XkO1aO3x3CLns1em7ft9U77B88LpK9jIrF8C-IH32JPWVazRFo0gBIBZ9FpA"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_1_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"mechanic_code\": \"TRAC_JHN\",\r\n    \"problem_details\": \"Hi Jhon\",\r\n    \"vin\": \"{{VIN}}\",\r\n    \"mechanic_api\": \"{{url}}/workshop/api/mechanic/receive_report\",\r\n    \"repeat_request_if_failed\": false,\r\n    \"number_of_repeats\": 1\r\n}"
+				},
+				"url": {
+					"raw": "{{url}}/workshop/api/merchant/contact_mechanic",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"workshop",
+						"api",
+						"merchant",
+						"contact_mechanic"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetReport",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = pm.collectionVariables.get('X-Forwarded-For');\r",
+							"if (!xff){\r",
+							"    xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"    \r",
+							"}\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtb25zdGVyQGRhcmt3ZWIuY29tIiwiaWF0IjoxNjA4NTQzODI0LCJleHAiOjE2MDg2MzAyMjR9.AAIvhrtstlloPf7-NNCcmhEZm-XkO1aO3x3CLns1em7ft9U77B88LpK9jIrF8C-IH32JPWVazRFo0gBIBZ9FpA"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_1_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/workshop/api/mechanic/mechanic_report?report_id={{report_id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"workshop",
+						"api",
+						"mechanic",
+						"mechanic_report"
+					],
+					"query": [
+						{
+							"key": "report_id",
+							"value": "{{report_id}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get products",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    var jsonData = pm.response.json();",
+							"    var productId = jsonData.products[0].id;",
+							"    pm.collectionVariables.set(\"product_id\", productId);",
+							"    console.log(\"Product ID \", productId);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = pm.collectionVariables.get('X-Forwarded-For');\r",
+							"if (!xff){\r",
+							"    xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"    \r",
+							"}\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/workshop/api/shop/products?limit=30&offset=0",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"workshop",
+						"api",
+						"shop",
+						"products"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "30"
+						},
+						{
+							"key": "offset",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    var jsonData = JSON.parse(responseBody);",
+							"    var order = jsonData.id;",
+							"    pm.collectionVariables.set(\"order_id\", order);",
+							"    console.log(order);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = pm.collectionVariables.get('X-Forwarded-For');\r",
+							"if (!xff){\r",
+							"    xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"    \r",
+							"}\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"product_id\":{{product_id}},\"quantity\":1}"
+				},
+				"url": {
+					"raw": "{{url}}/workshop/api/shop/orders",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"workshop",
+						"api",
+						"shop",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get orders",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = pm.collectionVariables.get('X-Forwarded-For');\r",
+							"if (!xff){\r",
+							"    xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"    \r",
+							"}\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/workshop/api/shop/orders/all?limit=30&offset=0",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"workshop",
+						"api",
+						"shop",
+						"orders",
+						"all"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "30"
+						},
+						{
+							"key": "offset",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = pm.collectionVariables.get('X-Forwarded-For');\r",
+							"if (!xff){\r",
+							"    xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"    \r",
+							"}\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/workshop/api/shop/orders/{{order_id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"workshop",
+						"api",
+						"shop",
+						"orders",
+						"{{order_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Return order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = pm.collectionVariables.get('X-Forwarded-For');\r",
+							"if (!xff){\r",
+							"    xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"    \r",
+							"}\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/workshop/api/shop/orders/return_order?order_id={{order_id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"workshop",
+						"api",
+						"shop",
+						"orders",
+						"return_order"
+					],
+					"query": [
+						{
+							"key": "order_id",
+							"value": "{{order_id}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = pm.collectionVariables.get('X-Forwarded-For');\r",
+							"if (!xff){\r",
+							"    xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"    \r",
+							"}\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"product_id\":4,\"quantity\":1}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/workshop/api/shop/orders/{{order_id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"workshop",
+						"api",
+						"shop",
+						"orders",
+						"{{order_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add video",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    var jsonData = JSON.parse(responseBody);",
+							"    var video_id = jsonData.id;",
+							"    pm.collectionVariables.set(\"video_id\", video_id);",
+							"    console.log(video_id);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = pm.collectionVariables.get('X-Forwarded-For');\r",
+							"if (!xff){\r",
+							"    xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"    \r",
+							"}\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"file\"; filename=\"abc.mp4\"\r\nContent-Type: video/mp4\r\n\r\nhakfhas\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/identity/api/v2/user/videos",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"identity",
+						"api",
+						"v2",
+						"user",
+						"videos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Video",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = pm.collectionVariables.get('X-Forwarded-For');\r",
+							"if (!xff){\r",
+							"    xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"    \r",
+							"}\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/identity/api/v2/user/videos/{{video_id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"identity",
+						"api",
+						"v2",
+						"user",
+						"videos",
+						"{{video_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change Video Name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = pm.collectionVariables.get('X-Forwarded-For');\r",
+							"if (!xff){\r",
+							"    xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"    \r",
+							"}\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"videoName\":\"{{$randomNoun}}.mp4\"}"
+				},
+				"url": {
+					"raw": "{{url}}/identity/api/v2/user/videos/{{video_id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"identity",
+						"api",
+						"v2",
+						"user",
+						"videos",
+						"{{video_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Share video",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = pm.collectionVariables.get('X-Forwarded-For');\r",
+							"if (!xff){\r",
+							"    xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"    \r",
+							"}\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/identity/api/v2/user/videos/convert_video?video_id={{video_id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"identity",
+						"api",
+						"v2",
+						"user",
+						"videos",
+						"convert_video"
+					],
+					"query": [
+						{
+							"key": "video_id",
+							"value": "{{video_id}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user dashboard",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = pm.collectionVariables.get('X-Forwarded-For');\r",
+							"if (!xff){\r",
+							"    xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"    \r",
+							"}\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/identity/api/v2/user/dashboard",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"identity",
+						"api",
+						"v2",
+						"user",
+						"dashboard"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add new video",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    var jsonData = JSON.parse(responseBody);",
+							"    var video_id = jsonData.id;",
+							"    pm.collectionVariables.set(\"video_id\", video_id);",
+							"    console.log(video_id);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = pm.collectionVariables.get('X-Forwarded-For');\r",
+							"if (!xff){\r",
+							"    xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"    \r",
+							"}\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"file\"; filename=\"abc.mp4\"\r\nContent-Type: video/mp4\r\n\r\nhakfhas\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--"
+				},
+				"url": {
+					"raw": "{{url}}/identity/api/v2/user/videos",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"identity",
+						"api",
+						"v2",
+						"user",
+						"videos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete video",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = pm.collectionVariables.get('X-Forwarded-For');\r",
+							"if (!xff){\r",
+							"    xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"    \r",
+							"}\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/identity/api/v2/user/videos/{{video_id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"identity",
+						"api",
+						"v2",
+						"user",
+						"videos",
+						"{{video_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    var jsonData = JSON.parse(responseBody);",
+							"    pm.collectionVariables.set(\"adminToken\", jsonData.token);",
+							"    var token = pm.collectionVariables.get(\"adminToken\");",
+							"    pm.test(\"Token is set\", function () {",
+							"        pm.expect(jsonData.token).to.eql(token);",
+							"    });",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For-Admin\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\":\"admin@example.com\",\"password\":\"Admin!123\"}"
+				},
+				"url": {
+					"raw": "{{url}}/identity/api/auth/login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"identity",
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    var jsonData = pm.response.json();",
+							"    var productId = jsonData.id;",
+							"    pm.collectionVariables.set(\"product_id\", productId);",
+							"    console.log(\"Product ID \", productId);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = pm.collectionVariables.get('X-Forwarded-For');\r",
+							"if (!xff){\r",
+							"    xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"    \r",
+							"}\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{adminToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"NewSeat\",\n    \"price\": 100,\n    \"image_url\": \"images/seat.svg\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/workshop/api/shop/products",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"workshop",
+						"api",
+						"shop",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ReAdd new video",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    var jsonData = JSON.parse(responseBody);",
+							"    var video_id = jsonData.id;",
+							"    pm.collectionVariables.set(\"video_id\", video_id);",
+							"    console.log(video_id);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = pm.collectionVariables.get('X-Forwarded-For');\r",
+							"if (!xff){\r",
+							"    xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"    \r",
+							"}\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"file\"; filename=\"abc.mp4\"\r\nContent-Type: video/mp4\r\n\r\nhakfhas\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--"
+				},
+				"url": {
+					"raw": "{{url}}/identity/api/v2/user/videos",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"identity",
+						"api",
+						"v2",
+						"user",
+						"videos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Workshop User Details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    var jsonData = JSON.parse(responseBody);",
+							"    var video_id = jsonData.id;",
+							"    pm.collectionVariables.set(\"video_id\", video_id);",
+							"    console.log(video_id);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = pm.collectionVariables.get('X-Forwarded-For');\r",
+							"if (!xff){\r",
+							"    xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"    \r",
+							"}\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{adminToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"file\"; filename=\"abc.mp4\"\r\nContent-Type: video/mp4\r\n\r\nhakfhas\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--"
+				},
+				"url": {
+					"raw": "{{url}}/workshop/api/management/users/all?limit=30&offset=0",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"workshop",
+						"api",
+						"management",
+						"users",
+						"all"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "30"
+						},
+						{
+							"key": "offset",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change email",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = pm.collectionVariables.get('X-Forwarded-For');\r",
+							"if (!xff){\r",
+							"    xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"    \r",
+							"}\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"old_email\":\"{{email}}\",\"new_email\":\"{{new_email}}\"}"
+				},
+				"url": {
+					"raw": "{{url}}/identity/api/v2/user/change-email",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"identity",
+						"api",
+						"v2",
+						"user",
+						"change-email"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SearchMailVerificationToken",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"",
+							"function dynamicSort(property) {",
+							"    var sortOrder = 1;",
+							"    if(property[0] === \"-\") {",
+							"        sortOrder = -1;",
+							"        property = property.substr(1);",
+							"    }",
+							"    return function (a,b) {",
+							"        /* next line works with strings and numbers, ",
+							"         * and you may want to customize it to your needs",
+							"         */",
+							"        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;",
+							"        return result * sortOrder;",
+							"    }",
+							"}",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    var jsonData = JSON.parse(responseBody);",
+							"    var mails = jsonData.items;",
+							"",
+							"    pm.test(\"Get Token\", function () {",
+							"        pm.expect(mails.length).to.be.gt(0);",
+							"        //mails.sort(dynamicSort(\"Created\"));",
+							"        var mail = mails[0];",
+							"        var mbody = mail['Raw']['Data'].replace(/[^a-zA-Z0-9<>:]*\\n/g, \"\");",
+							"        console.log(mbody);",
+							"        var tokentext = mbody.match(/token:\\s*[^\\s]+/i);",
+							"        console.log(tokentext);",
+							"        var email_token = tokentext[0].match(/>([A-Za-z0-9]+)</)[1];",
+							"        console.log(\"Token: \" + email_token);",
+							"        pm.collectionVariables.set(\"email_token\", email_token);",
+							"    });",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = pm.collectionVariables.get('X-Forwarded-For');\r",
+							"if (!xff){\r",
+							"    xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"    \r",
+							"}\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url_mail}}/api/v2/search?kind=to&query={{new_email}}&limit=10",
+					"host": [
+						"{{url_mail}}"
+					],
+					"path": [
+						"api",
+						"v2",
+						"search"
+					],
+					"query": [
+						{
+							"key": "kind",
+							"value": "to"
+						},
+						{
+							"key": "query",
+							"value": "{{new_email}}"
+						},
+						{
+							"key": "limit",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Verify email token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = pm.collectionVariables.get('X-Forwarded-For');\r",
+							"if (!xff){\r",
+							"    xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"    \r",
+							"}\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"old_email\": \"{{email}}\", \"new_email\":\"{{new_email}}\",\"token\":\"{{email_token}}\"}"
+				},
+				"url": {
+					"raw": "{{url}}/identity/api/v2/user/verify-email-token",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"identity",
+						"api",
+						"v2",
+						"user",
+						"verify-email-token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login Back",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    var jsonData = JSON.parse(responseBody);",
+							"    pm.collectionVariables.set(\"token\", jsonData.token);",
+							"    var token = pm.collectionVariables.get(\"token\");",
+							"    pm.test(\"Token is set\", function () {",
+							"        pm.expect(jsonData.token).to.eql(token);",
+							"    });",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = pm.collectionVariables.get('X-Forwarded-For');\r",
+							"if (!xff){\r",
+							"    xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"    \r",
+							"}\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\":\"{{new_email}}\",\"password\":\"{{password}}\"}"
+				},
+				"url": {
+					"raw": "{{url}}/identity/api/auth/login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"identity",
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change email Back",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = pm.collectionVariables.get('X-Forwarded-For');\r",
+							"if (!xff){\r",
+							"    xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"    \r",
+							"}\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"old_email\":\"{{new_email}}\",\"new_email\":\"{{email}}\"}"
+				},
+				"url": {
+					"raw": "{{url}}/identity/api/v2/user/change-email",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"identity",
+						"api",
+						"v2",
+						"user",
+						"change-email"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SearchMailVerificationToken Back",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"function dynamicSort(property) {",
+							"    var sortOrder = 1;",
+							"    if(property[0] === \"-\") {",
+							"        sortOrder = -1;",
+							"        property = property.substr(1);",
+							"    }",
+							"    return function (a,b) {",
+							"        /* next line works with strings and numbers, ",
+							"         * and you may want to customize it to your needs",
+							"         */",
+							"        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;",
+							"        return result * sortOrder;",
+							"    }",
+							"}",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    var jsonData = JSON.parse(responseBody);",
+							"    var mails = jsonData.items;",
+							"",
+							"    pm.test(\"Get Token\", function () {",
+							"        pm.expect(mails.length).to.be.gt(0);",
+							"        //mails.sort(dynamicSort(\"Created\"));",
+							"        var mail = mails[0];",
+							"        var mbody = mail['Raw']['Data'].replace(/[^a-zA-Z0-9<>:]*\\n/g, \"\");",
+							"        console.log(mbody);",
+							"        var tokentext = mbody.match(/token:\\s*[^\\s]+/i);",
+							"        console.log(tokentext);",
+							"        var email_token = tokentext[0].match(/>([A-Za-z0-9]+)</)[1];",
+							"        console.log(\"Token: \" + email_token);",
+							"        pm.collectionVariables.set(\"email_token\", email_token);",
+							"    });",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = pm.collectionVariables.get('X-Forwarded-For');\r",
+							"if (!xff){\r",
+							"    xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"    \r",
+							"}\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url_mail}}/api/v2/search?kind=to&query={{email}}",
+					"host": [
+						"{{url_mail}}"
+					],
+					"path": [
+						"api",
+						"v2",
+						"search"
+					],
+					"query": [
+						{
+							"key": "kind",
+							"value": "to"
+						},
+						{
+							"key": "query",
+							"value": "{{email}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Verify email token Back",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = pm.collectionVariables.get('X-Forwarded-For');\r",
+							"if (!xff){\r",
+							"    xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"    \r",
+							"}\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"old_email\": \"{{new_email}}\", \"new_email\":\"{{email}}\",\"token\":\"{{email_token}}\"}"
+				},
+				"url": {
+					"raw": "{{url}}/identity/api/v2/user/verify-email-token",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"identity",
+						"api",
+						"v2",
+						"user",
+						"verify-email-token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    var jsonData = JSON.parse(responseBody);",
+							"    pm.collectionVariables.set(\"token\", jsonData.token);",
+							"    var token = pm.collectionVariables.get(\"token\");",
+							"    pm.test(\"Token is set\", function () {",
+							"        pm.expect(jsonData.token).to.eql(token);",
+							"    });",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const {Property} = require('postman-collection');\r",
+							"var xff = pm.collectionVariables.get('X-Forwarded-For');\r",
+							"if (!xff){\r",
+							"    xff = Property.replaceSubstitutions('{{$randomIP}}');\r",
+							"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);\r",
+							"    \r",
+							"}\r",
+							"pm.collectionVariables.set(\"X-Forwarded-For\", xff);\r",
+							"pm.request.headers.remove('X-Forwarded-For');\r",
+							"pm.request.headers.add({ \r",
+							"    // These keys appears when you set a header by hand. Just for fun they are here\r",
+							"    disabled: false,\r",
+							"    // Your header, effectively\r",
+							"    key: 'X-Forwarded-For', \r",
+							"    value: xff\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\":\"{{email}}\",\"password\":\"{{password}}\"}"
+				},
+				"url": {
+					"raw": "{{url}}/identity/api/auth/login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"identity",
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Public Key",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/.well-known/jwks.json",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						".well-known",
+						"jwks.json"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"const {Property} = require('postman-collection');",
+					"var xff = pm.collectionVariables.get('X-Forwarded-For');",
+					"if (!xff){",
+					"    xff = Property.replaceSubstitutions('{{$randomIP}}');",
+					"    console.log(\"X-Forwarded-For  setting XFF to \"+xff);",
+					"    ",
+					"}",
+					"pm.collectionVariables.set(\"X-Forwarded-For\", xff);",
+					"pm.request.headers.remove('X-Forwarded-For');",
+					"pm.request.headers.add({ ",
+					"    // These keys appears when you set a header by hand. Just for fun they are here",
+					"    disabled: false,",
+					"    // Your header, effectively",
+					"    key: 'X-Forwarded-For', ",
+					"    value: xff",
+					"});"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "X-Forwarded-For",
+			"value": ""
+		},
+		{
+			"key": "X-Forwarded-For-Admin",
+			"value": ""
+		},
+		{
+			"key": "vehicle_id",
+			"value": ""
+		},
+		{
+			"key": "name",
+			"value": ""
+		},
+		{
+			"key": "new_name",
+			"value": ""
+		},
+		{
+			"key": "email",
+			"value": ""
+		},
+		{
+			"key": "new_email",
+			"value": ""
+		},
+		{
+			"key": "password",
+			"value": ""
+		},
+		{
+			"key": "phone",
+			"value": ""
+		},
+		{
+			"key": "token",
+			"value": ""
+		},
+		{
+			"key": "VIN",
+			"value": ""
+		},
+		{
+			"key": "PIN",
+			"value": ""
+		},
+		{
+			"key": "report_id",
+			"value": ""
+		},
+		{
+			"key": "product_id",
+			"value": ""
+		},
+		{
+			"key": "order_id",
+			"value": ""
+		},
+		{
+			"key": "video_id",
+			"value": ""
+		},
+		{
+			"key": "adminToken",
+			"value": ""
+		},
+		{
+			"key": "email_token",
+			"value": ""
+		},
+		{
+			"key": "OTP",
+			"value": ""
+		},
+		{
+			"key": "post_id",
+			"value": ""
+		},
+		{
+			"key": "mechanicToken",
+			"value": ""
+		}
+	]
+}
