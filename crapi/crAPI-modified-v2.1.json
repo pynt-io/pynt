@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "70c72275-e112-4542-a5f3-4ba2976cfc44",
-		"name": "crAPI Accepted wallarm",
+		"name": "crAPI Accepted",
 		"description": "crAPI Training Scripts",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "18686113"
